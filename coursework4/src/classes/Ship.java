@@ -62,7 +62,7 @@ public class Ship {
 	 * @param horizontal
 	 */
 	void setHorizontal(boolean horizontal) {
-		this.horizontal = true;
+		this.horizontal = horizontal;
 	}
 	
 	/* Instance methods */
@@ -71,6 +71,8 @@ public class Ship {
 		setBowRow(row);
 		setBowColumn(column);
 		//TODO set the orientation of the ship and complete method
+		
+		
 	}
 	
 	
