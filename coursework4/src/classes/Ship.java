@@ -20,21 +20,21 @@ public class Ship {
 	/* Public Interface */
 	/* Getters */
 	
-	/*
-	 *  Accessor method for bowRow
+	/**
+	 * Accessor method for bowRow
 	 */
 	int getBowRow() {
 		 return bowRow;
 	}
 	
-	/*
+	/**
 	 *  Accessor method for bowColumn
 	 */
 	int getBowColumn() {
 		return bowColumn;
 	}
 	
-	/*
+	/**
 	 *  Accessor method for horizontal
 	 */
 	Boolean isHorizontal() {
@@ -44,21 +44,21 @@ public class Ship {
 	
 	/*setters */
 	
-	/*
+	/**
 	 * @param row
 	 */
 	void setBowRow(int row) {
 		this.bowRow = row;
 	}
 	
-	/*
+	/**
 	 * @param column
 	 */
 	void setBowColumn(int column) {
 		this.bowColumn = column;
 	}
 	
-	/*
+	/**
 	 * @param horizontal
 	 */
 	void setHorizontal(boolean horizontal) {
@@ -73,6 +73,11 @@ public class Ship {
 		//TODO set the orientation of the ship and complete method
 		
 		
+	}
+
+	boolean shootAt(int row, int column) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	
