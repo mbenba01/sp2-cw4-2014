@@ -22,4 +22,8 @@ public class Ocean {
 		}
 	}
 	
+	public void printOcean() {
+		
+	}
+	
 }

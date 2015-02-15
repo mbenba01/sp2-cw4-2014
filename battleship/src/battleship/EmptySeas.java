@@ -14,5 +14,15 @@ public class EmptySeas extends Ship {
 	public EmptySeas() {
 		length = 1;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "[EmptySeas]";
+	}
+	
+	
 	
 }

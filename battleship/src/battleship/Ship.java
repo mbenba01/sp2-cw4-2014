@@ -3,6 +3,8 @@
  */
 package battleship;
 
+
+
 /**
  * 
  * @author Mustapha Benbaziz
@@ -63,6 +65,14 @@ public class Ship {
 	
 	/* setters */
 	
+	
+	/**
+	 * 
+	 * @param length
+	 */
+	public void setLength(int length) {
+		this.length = length;
+	}
 	/**
 	 * 
 	 * @param row
