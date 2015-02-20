@@ -18,7 +18,7 @@ public class Ship {
 	
 	boolean horizontal; // 
 	
-	boolean[] hit = new boolean[4]; // an array of booleans telling whether that part of the ship has been hit.
+	boolean[] hit; // an array of booleans telling whether that part of the ship has been hit.
 	
 	
 	/* Getters */

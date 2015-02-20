@@ -23,6 +23,9 @@ public class BttleShipGame {
 	
 	public static void takeShots(int[] shots) {
 		Scanner input = new Scanner(System.in);
+		Ocean board = new Ocean();
+		
+		board.print();
 		
 		System.out.print("Choose a row: ");
 		shots[0] = input.nextInt();

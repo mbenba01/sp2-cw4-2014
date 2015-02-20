@@ -7,11 +7,11 @@ package battleship;
  * @author mbenb_000
  *
  */
-public class EmptySeas extends Ship {
+public class EmptySea extends Ship {
 	
 	int length;
 	
-	public EmptySeas() {
+	public EmptySea() {
 		length = 1;
 	}
 
@@ -20,7 +20,7 @@ public class EmptySeas extends Ship {
 	 */
 	@Override
 	public String toString() {
-		return "[EmptySeas]";
+		return "[EmptySea]";
 	}
 	
 	
