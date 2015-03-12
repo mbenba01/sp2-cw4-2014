@@ -40,6 +40,7 @@ public class Ocean {
 		return ships;
 	}
 	
+	
 	public void print() {
 		for(int index = 0; index < BOARDLENGTH; index++) {
 			System.out.print(" ");
