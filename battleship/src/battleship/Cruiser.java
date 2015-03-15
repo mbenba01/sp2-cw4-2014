@@ -10,7 +10,8 @@ package battleship;
 public class Cruiser extends Ship {
 	
 	public Cruiser() {
-		length = 2;
+		length = 3;
+		setHitArray();
 	}
 
 	
