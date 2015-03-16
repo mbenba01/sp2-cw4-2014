@@ -21,7 +21,7 @@ public class Destroyer extends Ship {
 
 	@Override
 	public String toString() {
-		return "[D]";
+		return "[D][D]";
 	}
 	
 	

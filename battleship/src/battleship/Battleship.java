@@ -16,7 +16,7 @@ public class Battleship extends Ship {
 
 	@Override
 	public String toString() {
-		return "[B]";
+		return "[B][B][B][B]";
 	}
 	
 	@Override

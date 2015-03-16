@@ -22,7 +22,7 @@ public class Cruiser extends Ship {
 
 	@Override
 	public String toString() {
-		return "[C]";
+		return "[C][C][C]";
 	}
 	
 	
