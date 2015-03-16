@@ -14,6 +14,10 @@ public class Cruiser extends Ship {
 		setHitArray();
 	}
 
+	@Override
+	public int getLength() {
+		return length;
+	}
 	
 	@Override 
 	public String getShipType() {
@@ -22,7 +26,7 @@ public class Cruiser extends Ship {
 
 	@Override
 	public String toString() {
-		return "[C][C][C]";
+		return "[C]";
 	}
 	
 	

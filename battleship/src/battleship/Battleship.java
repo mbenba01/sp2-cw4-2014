@@ -15,8 +15,8 @@ public class Battleship extends Ship {
 	}
 
 	@Override
-	public String toString() {
-		return "[B][B][B][B]";
+	public int getLength() {
+		return length;
 	}
 	
 	@Override
@@ -25,5 +25,8 @@ public class Battleship extends Ship {
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		return "[B]";
+	}
 }

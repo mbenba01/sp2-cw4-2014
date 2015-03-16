@@ -15,6 +15,11 @@ public class Submarine extends Ship {
 	}
 	
 	@Override
+	public int getLength() {
+		return length;
+	}
+	
+	@Override
 	public String getShipType() {
 		return "Submarine";
 	}

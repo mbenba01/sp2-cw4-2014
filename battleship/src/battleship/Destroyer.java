@@ -15,13 +15,18 @@ public class Destroyer extends Ship {
 	}
 	
 	@Override
+	public int getLength() {
+		return length;
+	}
+	
+	@Override
 	public String getShipType() {
 		return "Destroyer";
 	}
 
 	@Override
 	public String toString() {
-		return "[D][D]";
+		return "[D]";
 	}
 	
 	
