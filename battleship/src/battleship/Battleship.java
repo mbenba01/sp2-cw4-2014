@@ -11,7 +11,7 @@ public class Battleship extends Ship {
 	
 	public Battleship() {
 		length = 4;
-		setHitArray();
+		//setHitArray();
 	}
 
 	@Override

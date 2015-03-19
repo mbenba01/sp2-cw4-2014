@@ -11,7 +11,7 @@ public class Submarine extends Ship {
 
 	public Submarine() {
 		length = 1;
-		setHitArray();
+		//setHitArray();
 	}
 	
 	@Override
