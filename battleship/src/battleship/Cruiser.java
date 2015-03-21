@@ -11,7 +11,6 @@ public class Cruiser extends Ship {
 	
 	public Cruiser() {
 		length = 3;
-		//setHitArray();
 	}
 
 	@Override
