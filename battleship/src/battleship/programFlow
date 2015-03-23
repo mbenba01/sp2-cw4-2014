@@ -1,0 +1,21 @@
+Understand the strategy of the game: 
+this is a solo version of the Battleship game where the computer places the ships, 
+and the human attempts to sink them.
+
+
+How to play:
+Initially the ocean is empty.  
+Then the computer places the ten ships on the ocean in such a way that no ships are 
+immediately adjacent to each other, either horizontally, vertically, or diagonally.
+
+The human player does not know where the ships are.
+
+THE INITIAL DISPLAY OF THE OCEAN SHOWS A 10 X 10 ARRAY OF LOCATIONS, ALL THE SAME.
+THE PLAYER TRIES TO HIT THE SHIPS, BY CALLING OUT A ROW AND COLUMN NUMBER.
+THE COMPUTER RESPONDS WITH ONE BIT OF INFORMATION - HIT OR MISS.
+THE PROGRAM DOES NOT PROVIDE ANY INFORMATION ABOUT THE KIND OF SHIP IF IT IS HIT BUT NOT SUNK
+WHEN A SHIP SINKS THE PROGRAM PRINTS OUT A MESSAGE: YOU JUST SANK A 'SHIP-TYPE'.
+
+
+AFTER EACH SHOT THE COMPUTER REDISPAYS THE OCEAN WITH THE NEW INFORMATION.
+A SHIP IS SUNK WHEN EVERY SQUARE OF THE SHIP HAS BEEN HIT.
