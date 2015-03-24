@@ -5,8 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import battleship.Battleship;
+import battleship.Cruiser;
+import battleship.Destroyer;
+import battleship.EmptySea;
 import battleship.Ocean;
 import battleship.Ship;
+import battleship.Submarine;
 
 /**
  * @author Mustapha Benbaziz
@@ -20,7 +24,7 @@ public class ShipTest {
 		
 		Ship carrier = new Ship();
 		carrier.setBowRow(9);
-		assertEquals("Wrong answer!", 8, carrier.getBowRow());
+		assertEquals("Incorrect row!", 8, carrier.getBowRow());
 		
 	}
 	
@@ -29,7 +33,7 @@ public class ShipTest {
 		
 		Ship carrier = new Ship();
 		carrier.setBowColumn(1);
-		assertEquals("Wrong answer!", 0, carrier.getBowColumn());
+		assertEquals("Incorrect column!", 0, carrier.getBowColumn());
 		
 	}
 	
@@ -38,7 +42,7 @@ public class ShipTest {
 		
 		Ship carrier = new Ship();
 		carrier.setHorizontal(true);
-		assertEquals("Wrong answer", false, carrier.isHorizontal());
+		assertEquals("Wrong answer!", false, carrier.isHorizontal());
 		
 	}
 	
@@ -46,9 +50,21 @@ public class ShipTest {
 	public void testGetShipType() {
 		
 		Ship battleship = new Battleship();
-		assertEquals("Wrong answer", "", battleship.getShipType());
+		assertEquals("incorrect ship type!", "", battleship.getShipType());
 		
 	}
+	
+	@Test
+	public void testGetLength() {
+
+		/*
+		 * Tested this method against all types of ship.
+		 */
+		Ship carrier = new Ship();
+		assertEquals("Incorrect length!", 5, carrier.getLength());
+		
+	}
+	
 	
 
 
