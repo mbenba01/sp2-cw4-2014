@@ -14,7 +14,7 @@ public class Ship {
 	
 	private int bowRow; // contains the front of the ship
 	private int bowColumn; // contains the front of the ship
-	private int length; // number of squares occupied by the ship.
+    protected int length; // number of squares occupied by the ship.
 	
 	boolean horizontal; // 
 	
