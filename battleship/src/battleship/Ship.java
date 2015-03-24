@@ -98,13 +98,128 @@ public class Ship {
 	}
 
 	/**
+	 * Checks whether it is OK to place a ship at a given position on the board (ocean)
 	 * 
-	 * @param row
+	 * @param row 
+	 *            represents the horizontal position on the board
 	 * @param column
+	 *            represents the vertical position on the board
 	 * @param horizontal
+	 *            represents the horizontal ship orientation
 	 * @param ocean
+	 *            represents the game board
 	 * @return
+	 * 			  true if it is OK to place a ship at a given position
 	 */
-	
+	public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+
+		/* ASSUME IT'S OK TO PLACE A SHIP AT THIS POINT */
+		boolean okToPlaceShip = true;
+
+		/* STORE BOW COORDINATES IN TEMP VARIABLES TO USE IN THIS METHOD */
+		int tempBowRow = row;
+		int tempBowColumn = column;
+
+		/* DECLARE THE STERN COORDINATES */
+		int sternRow;
+		int sternColumn;
+
+		/* LOCAL VARIABLES USED AS TEMPORARY HOLDERS TO CHECK SURROUNDING CELLS */
+		int cellAbove = tempBowRow;
+		int cellBelow = tempBowRow;
+		int cellBefore = tempBowColumn;
+		int cellAfter = tempBowColumn;
+
+		/*
+		 * INITIALISE STERN COORDINATES ACCORDING TO THE ORIEMNTATION OF THE
+		 * SHIP
+		 */
+		if (horizontal) {
+			sternRow = row;
+			sternColumn = column + getLength();
+		} else {
+			sternRow = row + getLength();
+			sternColumn = column;
+		}
+
+		/* CHECK THE STERN (END) OF THE SHIP IS NOT OUT OF BOUND */
+		if (sternRow > ocean.getShipArray().length
+				|| sternColumn > ocean.getShipArray().length) {
+			okToPlaceShip = false;
+		}
+
+		/* USED TO CHECK THE CELLS SURROUNDING THE SHIP */
+		if (tempBowRow > 0) {
+			cellAbove--;
+		}
+		if (tempBowColumn > 0) {
+			cellBefore--;
+		}
+
+		if (sternRow < 9) {
+			cellBelow++;
+		}
+		if (sternColumn < 9) {
+			cellAfter++;
+		}
+
+		/* ITERATE THROUGH THE BOARD (OCEAN) AND CHECK FOR OCCUPIED CELLS */
+		for (int x = cellAbove; x < cellBelow; x++) {
+
+			for (int y = cellBefore; y < cellAfter; y++) {
+
+				/* CHECK IF POSITION IS OCCUPIED */
+				if (ocean.isOccupied(x, y)) {
+					okToPlaceShip = false;
+				}
+			}
+		}
+
+		return okToPlaceShip;
+
+	}
+
+	/**
+	 * Places the ship on the board (ocean)
+	 * 
+	 * @param row 
+	 *            represents the horizontal position on the board
+	 * @param column
+	 *            represents the vertical position on the board
+	 * @param horizontal
+	 *            represents the horizontal ship orientation
+	 * @param ocean
+	 *            represents the game board
+	 */
+	public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
+
+		this.setBowRow(row);
+		this.setBowColumn(column);
+		this.setHorizontal(horizontal);
+
+		for (int i = 0; i < getLength(); i++) {
+
+			if (horizontal) {
+
+				/*
+				 * THE SHIP REMAINS ON THE SAME ROW AND ONLY THE COLUMN
+				 * INCREMENTS
+				 */
+				ocean.getShipArray()[row][column + i] = this;
+
+			} else {
+
+				/*
+				 * IS VERTICAL..THE SHIP REMAINS ON THE SAME COLUMN AND ONLY THE
+				 * ROW INCREMENTS
+				 */
+				ocean.getShipArray()[row + i][column] = this;
+
+			}
+
+		}
+
+	}
+
 
 }

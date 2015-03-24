@@ -60,5 +60,10 @@ public class Ocean {
 		}
 		
 	}
+
+	public boolean isOccupied(int row, int column) {
+		// TODO Auto-generated method stub
+		return !(ships[row][column] instanceof EmptySea);
+	}
 	
 }
