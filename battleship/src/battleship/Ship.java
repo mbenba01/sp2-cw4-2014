@@ -3,102 +3,100 @@
  */
 package battleship;
 
-
-
 /**
  * 
  * @author Mustapha Benbaziz
  *
  */
 public class Ship {
-	
-	private int bowRow; // contains the front of the ship
-	private int bowColumn; // contains the front of the ship
-    protected int length; // number of squares occupied by the ship.
-	
-	boolean horizontal; // 
-	
-	boolean[] hit; // an array of booleans telling whether that part of the ship has been hit.
-	
-	
-	/* Getters */
-	
+
+	/* CONTAINS THE FRONT OF THE SHIP (LATITUDE) */
+	private int bowRow;
+
+	/* CONTAINS THE FRONT OF THE SHIP (LONGITUDE) */
+	private int bowColumn;
+
+	/* NUMBER OF SQUARES OCCUPIED BY THE SHIP */
+	protected int length;
+
+	/* TRUE IF A SHIP IS ALIGNED HORIZONTALLY, FALSE OTHERWISE */
+	boolean horizontal;
+
+	/* ARRAY OF BOOLEANS STORING WHICH PART OF A SHIP IS HIT */
+	boolean[] hit;
+
 	/**
 	 * 
-	 * @return the row of the front of the ship
+	 * @return the row of the front of the ship (latitude)
 	 */
 	public int getBowRow() {
 		return bowRow;
 	}
-	
+
 	/**
 	 * 
-	 * @return the column of the front of the ship
+	 * @return the column of the front of the ship (longitude).
 	 */
 	public int getBowColumn() {
 		return bowColumn;
 	}
-	
+
 	/**
-	 *  
-	 * @return horizontal if the ship occupies a single row
+	 * 
+	 * @return horizontal if the ship occupies a single row.
 	 */
-	boolean isHorizontal() {
+	public boolean isHorizontal() {
 		return horizontal;
 	}
-	
+
 	/**
+	 * This method exists only to be overridden.
 	 * 
-	 * @return an empty string. this method exists to be overridden 
+	 * @return an empty string.
 	 */
-	String getShipType() {
+	public String getShipType() {
 		return "";
 	}
-	
+
 	/**
+	 * This method exists only to be overridden.
 	 * 
-	 * @return the length of the ship
+	 * @return the length of a particular ship
 	 */
-	 public int getLength() {
+	public int getLength() {
 		return length;
 	}
-	
-	/* setters */
-	
-	
+
 	/**
-	 * 
-	 * @param length
-	 */
-	public void setLength(int length) {
-		this.length = length;
-	}
-	/**
+	 * Sets the row for the position of the front of the ship
 	 * 
 	 * @param row
+	 *            represents the row for the position of the ship
 	 */
 	public void setBowRow(int row) {
 		this.bowRow = row;
 	}
-	
+
 	/**
+	 * Sets the row for the position of the front of the ship
 	 * 
 	 * @param column
+	 *            represents the column for the position of the ship
 	 */
 	public void setBowColumn(int column) {
 		this.bowColumn = column;
 	}
-	
+
 	/**
+	 * Sets the ship to a horizontal position
 	 * 
 	 * @param horizontal
+	 *            represents the horizontal orientation of the ship
 	 */
 	public void setHorizontal(boolean horizontal) {
 		this.horizontal = horizontal;
 	}
-	
-	/* instance methods */
-	
+
 	/**
 	 * 
 	 * @param row
@@ -107,16 +105,6 @@ public class Ship {
 	 * @param ocean
 	 * @return
 	 */
+	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
