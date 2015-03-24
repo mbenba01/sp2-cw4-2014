@@ -65,6 +65,22 @@ public class ShipTest {
 		
 	}
 	
+	@Test
+	public void testPlaceShipAt() {
+		
+		Ocean board = new Ocean();
+		Ship carrier = new Ship();
+		
+		boolean horizontal = true;
+		
+		carrier.placeShipAt(2, 0, horizontal , board);
+		
+		assertEquals("Wrong answer!", 4, carrier.getBowRow());
+		assertEquals("Wrong answer!", 5, carrier.getBowColumn());
+		assertEquals("Wrong answer!", false, carrier.isHorizontal());
+		
+	}
+	
 	
 
 
