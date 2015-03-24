@@ -27,7 +27,7 @@ public class Ship {
 	 * 
 	 * @return the row of the front of the ship
 	 */
-	int getBowRow() {
+	public int getBowRow() {
 		return bowRow;
 	}
 	
@@ -59,7 +59,7 @@ public class Ship {
 	 * 
 	 * @return the length of the ship
 	 */
-	int getLength() {
+	 public int getLength() {
 		return length;
 	}
 	
@@ -77,7 +77,7 @@ public class Ship {
 	 * 
 	 * @param row
 	 */
-	void setBowRow(int row) {
+	public void setBowRow(int row) {
 		this.bowRow = row;
 	}
 	
@@ -85,7 +85,7 @@ public class Ship {
 	 * 
 	 * @param column
 	 */
-	void setBowColumn(int column) {
+	public void setBowColumn(int column) {
 		this.bowColumn = column;
 	}
 	
@@ -93,7 +93,7 @@ public class Ship {
 	 * 
 	 * @param horizontal
 	 */
-	void setHorizontal(boolean horizontal) {
+	public void setHorizontal(boolean horizontal) {
 		this.horizontal = horizontal;
 	}
 	
