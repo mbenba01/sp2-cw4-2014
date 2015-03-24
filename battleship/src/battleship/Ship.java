@@ -35,7 +35,7 @@ public class Ship {
 	 * 
 	 * @return the column of the front of the ship
 	 */
-	int getbowColumn() {
+	public int getBowColumn() {
 		return bowColumn;
 	}
 	

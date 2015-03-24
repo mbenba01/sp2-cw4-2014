@@ -19,9 +19,19 @@ public class ShipTest {
 		
 		Ship carrier = new Ship();
 		carrier.setBowRow(9);
-		assertEquals("Wrong answer!", carrier.getLength(), carrier.getBowRow());
+		assertEquals("Wrong answer!", 8, carrier.getBowRow());
 		
 	}
+	
+	@Test
+	public void testGetBowColumn() {
+		
+		Ship carrier = new Ship();
+		carrier.setBowColumn(1);
+		assertEquals("Wrong answer!", 0, carrier.getBowColumn());
+		
+	}
+	
 	
 
 
