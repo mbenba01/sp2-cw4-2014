@@ -3,6 +3,8 @@
  */
 package battleship;
 
+import java.util.Arrays;
+
 /**
  * 
  * @author Mustapha Benbaziz
@@ -224,11 +226,44 @@ public class Ship {
 	
 	public boolean shootAt(int row, int column) {
 		
+		/* STORE COORDINATES FOR THE SHIP TO COMPARE WITH USER INPUT (SHOT) */
+		int tempBowRow = this.getBowRow();
+		int tempBowColumn = this.getBowColumn();
 		
+		/* CHECK IF THE SHIP IS NOT SUNK */
+		if(isSunk()) {
+			return false;
+		}
+		
+		/* LOOP THROUGH THE LENGTH OF THE SHIP */
+		for(int i = 0; i < getLength(); i++) {
+			
+			
+			if(isHorizontal()) {
+				
+				/* IF THE SHIP IS ALIGNED HORIZONTALLY */
+				if(tempBowRow == row && tempBowColumn + i == column) {
+					 this.hit[i] = true;
+					 this.hitCount();
+					 return true;
+				}
+				
+			} else {
+				
+				/* IF THE SHIP IS ALIGNED VERTICALLY */
+				if(tempBowRow + i == row && tempBowColumn == column) {
+					this.hit[i] = true;
+					this.hitCount();
+					return true;
+				}
+				
+			}
+			
+		}
 		
 		return false;
 	}
-	
+
 	/**
 	 * loops through the hit array and checks if all ship parts are hit
 	 * @return true if all parts of the ship are hit
@@ -247,5 +282,47 @@ public class Ship {
 		/* RETURN TRUE IF ALL PARTS OF THE SHIP ARE HIT */
 		return true;
 	}
+	
+	
+	/* THIS METHOD IS USED FOR TESTING PURPOSES */
+	
+/*	public static void main(String[] args) {
+		
+		Ship test = new Battleship();
+		test.setHorizontal(false);
+		Ocean board = new Ocean();
+		Ship[][] ships = board.getShipArray();
+		test.setBowRow(2);
+		
+		for(int i=test.getBowRow(); i < test.getLength(); i++) {
+			if(test.horizontal) {
+				test.setBowColumn(i - 1);
+			} else {
+				test.setBowRow(i - 1);
+				test.setBowColumn(test.getBowRow());
+			}
+		}
+		
+		test.shootAt(2, 2);
+		test.shootAt(5, 2);
+		test.shootAt(3, 2);
+		test.shootAt(4, 2);
+		
+		
+		System.out.print(test);
+	}*/
+	
+	
+	/*public int hitCount() {
+		int count = 0;
+		for(int i = 0; i < this.getLength(); i++) {
+			if(!isSunk() && hit[i] == true) {
+				count++;
+			}
+		}
+		
+		return count;
+	}*/
+	
 
 }

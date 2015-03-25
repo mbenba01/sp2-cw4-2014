@@ -4,6 +4,8 @@
  */
 package battleship;
 
+import java.util.Arrays;
+
 /**
  * @author Mustapha Benbaziz
  *
@@ -38,10 +40,29 @@ public class Battleship extends Ship {
 	public String getShipType() {
 		return "Battleship";
 	}
-	
-	
+
+
 	@Override
 	public String toString() {
-		return "[B]";
+		
+		String output = "[.]";
+		
+		int counter = 0;
+		
+		for(int i = 0; i < hit.length; i++) {
+			if(hit[i]) {
+				
+				counter++;
+				
+				output = "[X]" + counter;
+				
+			}
+			
+		}
+		if(this.isSunk()) {
+			output = "[S]";
+		}
+		return output;
 	}
+	
 }
