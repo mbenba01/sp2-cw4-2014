@@ -50,6 +50,7 @@ public class Battleship extends Ship {
 		int counter = 0;
 		
 		for(int i = 0; i < hit.length; i++) {
+			
 			if(hit[i]) {
 				
 				counter++;
@@ -59,9 +60,11 @@ public class Battleship extends Ship {
 			}
 			
 		}
+		
 		if(this.isSunk()) {
 			output = "[S]";
 		}
+		
 		return output;
 	}
 	

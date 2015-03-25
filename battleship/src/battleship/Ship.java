@@ -244,7 +244,6 @@ public class Ship {
 				/* IF THE SHIP IS ALIGNED HORIZONTALLY */
 				if(tempBowRow == row && tempBowColumn + i == column) {
 					 this.hit[i] = true;
-					 this.hitCount();
 					 return true;
 				}
 				
@@ -253,7 +252,6 @@ public class Ship {
 				/* IF THE SHIP IS ALIGNED VERTICALLY */
 				if(tempBowRow + i == row && tempBowColumn == column) {
 					this.hit[i] = true;
-					this.hitCount();
 					return true;
 				}
 				
