@@ -23,7 +23,7 @@ public class Ship {
 	boolean horizontal;
 
 	/* ARRAY OF BOOLEANS STORING WHICH PART OF A SHIP IS HIT */
-	boolean[] hit;
+	protected boolean[] hit;
 
 	/**
 	 * 
@@ -100,16 +100,11 @@ public class Ship {
 	/**
 	 * Checks whether it is OK to place a ship at a given position on the board (ocean)
 	 * 
-	 * @param row 
-	 *            represents the horizontal position on the board
-	 * @param column
-	 *            represents the vertical position on the board
-	 * @param horizontal
-	 *            represents the horizontal ship orientation
-	 * @param ocean
-	 *            represents the game board
-	 * @return
-	 * 			  true if it is OK to place a ship at a given position
+	 * @param row represents the horizontal position on the board
+	 * @param column represents the vertical position on the board
+	 * @param horizontal represents the horizontal ship orientation
+	 * @param ocean represents the game board
+	 * @return true if it is OK to place a ship at a given position
 	 */
 	public boolean okToPlaceShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 
@@ -182,44 +177,75 @@ public class Ship {
 	/**
 	 * Places the ship on the board (ocean)
 	 * 
-	 * @param row 
-	 *            represents the horizontal position on the board
-	 * @param column
-	 *            represents the vertical position on the board
-	 * @param horizontal
-	 *            represents the horizontal ship orientation
-	 * @param ocean
-	 *            represents the game board
+	 * @param row represents the horizontal position on the board
+	 * @param column represents the vertical position on the board
+	 * @param horizontal represents the horizontal ship orientation
+	 * @param ocean represents the game board
 	 */
 	public void placeShipAt(int row, int column, boolean horizontal, Ocean ocean) {
 
+		/* SET COORDINATES TO PLACE THE SHIP AT */
 		this.setBowRow(row);
 		this.setBowColumn(column);
 		this.setHorizontal(horizontal);
+		
+		/* GET A REFERENCE TO THE SHIP ARRAY */
+		Ship[][] ships = ocean.getShipArray();
 
-		for (int i = 0; i < getLength(); i++) {
+		/* ONLY LOOP IF IT IS OK TO PLACE A SHIP AT THE GIVEN COORDINATES */
+		if(okToPlaceShipAt(row, column, horizontal, ocean)) {
+		
+			for (int i = 0; i < getLength(); i++) {
+			
+				if (horizontal) {
+				
+					/*
+					 * THE SHIP REMAINS ON THE SAME ROW AND ONLY THE COLUMN
+					 * INCREMENTS THE LENGTH OF THE SHIP
+					 */
+					ships[row][column + i] = this;
 
-			if (horizontal) {
+			
+				} else {
 
-				/*
-				 * THE SHIP REMAINS ON THE SAME ROW AND ONLY THE COLUMN
-				 * INCREMENTS
-				 */
-				ocean.getShipArray()[row][column + i] = this;
-
-			} else {
-
-				/*
-				 * IS VERTICAL..THE SHIP REMAINS ON THE SAME COLUMN AND ONLY THE
-				 * ROW INCREMENTS
-				 */
-				ocean.getShipArray()[row + i][column] = this;
+					/*
+					 * IS VERTICAL..THE SHIP REMAINS ON THE SAME COLUMN AND ONLY THE
+					 * ROW INCREMENTS THE LENGTH OF THE SHIP 
+					 */
+					ships[row + i][column] = this;
+			
+				}
 
 			}
-
+		
 		}
 
 	}
-
+	
+	public boolean shootAt(int row, int column) {
+		
+		
+		
+		return false;
+	}
+	
+	/**
+	 * loops through the hit array and checks if all ship parts are hit
+	 * @return true if all parts of the ship are hit
+	 */
+	public boolean isSunk() {
+		
+		/* CHECK IF ANY PART OF THE SHIP IS STILL NOT HIT */
+		for(boolean hit : hit) {
+			
+			if(!hit) {
+				return false;
+			}
+			
+		}
+		
+		/* RETURN TRUE IF ALL PARTS OF THE SHIP ARE HIT */
+		return true;
+	}
 
 }
