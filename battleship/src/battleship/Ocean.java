@@ -4,6 +4,8 @@
  */
 package battleship;
 
+import java.util.Arrays;
+
 /**
  * @author Mustapha Benbaziz
  *
@@ -27,7 +29,7 @@ public class Ocean {
 	private int hitCount;
 	
 	/* THE NUMBER OF SHIPS SUNK */
-	private int shipSunk;
+	private int shipsSunk;
 	
 	/* INITIALISE THE CONSTANT */
 	static {
@@ -51,12 +53,14 @@ public class Ocean {
 			}
 		}
 		
-		
+		/* INITIALISE INSTANCE VARIABLES */
 		shotsFired = 0;
 		hitCount = 0;
-		shipSunk = 0;
+		shipsSunk = 0;
 		
 	}
+	
+	
 	
 	public Ship[][] getShipArray() {
 		return ships;
@@ -87,5 +91,13 @@ public class Ocean {
 		// TODO Auto-generated method stub
 		return !(ships[row][column] instanceof EmptySea);
 	}
+
+
+	@Override
+	public String toString() {
+		return "[Ship]";
+	}
+	
+	
 	
 }
