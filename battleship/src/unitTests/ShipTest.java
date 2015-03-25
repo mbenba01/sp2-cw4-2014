@@ -79,10 +79,10 @@ public class ShipTest {
 		
 		Ship expected = new Ship();
 		
-		//assertEquals("incorrect ship type!", expected.getShipType(), battleship.getShipType());
-		//assertEquals("incorrect ship type!", expected.getShipType(), cruiser.getShipType());
-		//assertEquals("incorrect ship type!", expected.getShipType(), destroyer.getShipType());
-		//assertEquals("incorrect ship type!", expected.getShipType(), submarine.getShipType());
+		assertEquals("incorrect ship type!", expected.getShipType(), battleship.getShipType());
+		assertEquals("incorrect ship type!", expected.getShipType(), cruiser.getShipType());
+		assertEquals("incorrect ship type!", expected.getShipType(), destroyer.getShipType());
+		assertEquals("incorrect ship type!", expected.getShipType(), submarine.getShipType());
 		assertEquals("incorrect ship type!", expected.getShipType(), emptySea.getShipType());
 		
 	}
@@ -96,10 +96,10 @@ public class ShipTest {
 		
 		Ship expected = new Ship();
 		
-		//assertEquals("Incorrect length!", expected.getLength(), battleship.getLength());
-		//assertEquals("Incorrect length!", expected.getLength(), cruiser.getLength());
-		//assertEquals("Incorrect length!", expected.getLength(), destroyer.getLength());
-		//assertEquals("Incorrect length!", expected.getLength(), submarine.getLength());
+		assertEquals("Incorrect length!", expected.getLength(), battleship.getLength());
+		assertEquals("Incorrect length!", expected.getLength(), cruiser.getLength());
+		assertEquals("Incorrect length!", expected.getLength(), destroyer.getLength());
+		assertEquals("Incorrect length!", expected.getLength(), submarine.getLength());
 		assertEquals("Incorrect length!", expected.getLength(), emptySea.getLength());
 		
 	}
