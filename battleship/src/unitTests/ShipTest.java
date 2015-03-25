@@ -153,4 +153,21 @@ public class ShipTest {
 	}
 	
 	
+	@Test
+	public void testShootAt() {
+		
+		/* SHIP POSITIONED VERTICALLY */
+		boolean horizontal = false;
+		
+		/* PLACE SHIP AT ROW 2 AND COLUMN 2 */
+		battleship.placeShipAt(2, 2, horizontal, board);
+		
+		/* BECAUSE THIS IS A BATTLESHIP POSITIONED VERTICALLY, 
+		 * HAVING THE FIRST ARGUMENT IN shootAt() METHOD FROM 2 TO 5
+		 * WILL RETURN TRUE (PASS). ANY OTHER ARGUMENT SHOULD RETURN FALSE (FAIL).
+		 */
+		assertEquals("Wrong answer!", true, battleship.shootAt(2,2));
+		
+	}
+	
 }
