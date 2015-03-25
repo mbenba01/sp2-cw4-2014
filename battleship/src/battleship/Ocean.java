@@ -4,6 +4,7 @@
  */
 package battleship;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -16,8 +17,11 @@ import java.util.Arrays;
  */
 public class Ocean {
 	
-	/* CONSTANT VARIABLE REPRESENTING THE LENGTH OF THE BOARD */
+	/* CONSTANT REPRESENTING THE LENGTH OF THE BOARD */
 	private static final int BOARDLENGTH;
+	
+	/* CONSTANT REPRESENTING THE MAXIMUM NUMBER OF SHIPS */
+	private static final int SHIPS;
 	
 	/* USED TO DETERMINE WHICH SHIP IS IN ANY GIVEN LOCATION */
 	private Ship[][] ships;
@@ -34,6 +38,7 @@ public class Ocean {
 	/* INITIALISE THE CONSTANT */
 	static {
 		BOARDLENGTH = 10;
+		SHIPS = 10;
 	}
 	
 	
@@ -43,14 +48,16 @@ public class Ocean {
 	 */
 	public Ocean() {
 		
-		/* INITIALIZE SHIPS ARRAY (10 x 10) */
+		/* INITIALIZE THE SHIP ARRAY (10 x 10) */
 		ships = new Ship[BOARDLENGTH][BOARDLENGTH];
 		
 		/* FILL THE ARRAY WITH EMPTYSEA OBJECTS */
 		for(int row = 0; row < ships.length; row++) {
+			
 			for(int column = 0; column < ships.length; column++) {
 				ships[row][column] = new EmptySea();
 			}
+			
 		}
 		
 		/* INITIALISE INSTANCE VARIABLES */
@@ -60,15 +67,74 @@ public class Ocean {
 		
 	}
 	
+	/**
+	 * Checks if a given location on the board (ocean) is occupied by a ship 
+	 * @param row represents the horizontal axis of the location to check
+	 * @param column represents the vertical axis of the location to check
+	 * @return returns true if the location contains a ship
+	 */
+	public boolean isOccupied(int row, int column) {
+
+		return !(ships[row][column] instanceof EmptySea);
+		
+	}
 	
+	/**
+	 * Builds the fleet of different ships to be placed on the board
+	 * @return an arrayList of ship objects
+	 */
+	public ArrayList<Ship> buildTheFleet() {
+		
+		/* CREATE AN EMPTY ARRAY LIST TO STORE THE SHIPS */
+		ArrayList<Ship> fleet = new ArrayList<Ship>();
+		
+		/* USED TO STORE THE NUMBER OF SHIPS */
+		int count = 0;
+		
+		
+		/* PLACE THE SHIPS IN THE ARRAY LIS (BUILD THE FLEET) */
+		while(count < SHIPS) {
+			
+			if(count > 5) {
+				fleet.add(new Submarine());
+			} else if(count >= 3) {
+				fleet.add(new Destroyer());
+			} else if(count >= 1) {
+				fleet.add(new Cruiser());
+			} else {
+				fleet.add(new Battleship());
+			}
+			
+			count++;
+			
+		}
+		
+		/* RETURN THE ARRAYLIST OF SHIPS (THE FLEET) */
+		return fleet;
+		
+	}
 	
+	public int getShotsFired() {
+		return shotsFired;
+	}
+	
+	public int getHitCount() {
+		return hitCount;
+	}
+	
+	public int getShipsSunk() {
+		return shipsSunk;
+	}
+	/**
+	 * 
+	 * @return a 10 x 10 array of EmptySea objects
+	 */
 	public Ship[][] getShipArray() {
 		return ships;
 	}
 	
-	
 	public void print() {
-		for(int index = 0; index < BOARDLENGTH; index++) {
+		for(int index = 0; index < BOARDLENGTH;) {
 			System.out.print(" ");
 			for(int hindex = 0; hindex < BOARDLENGTH; hindex++) {
 			System.out.print("  " + hindex);
@@ -87,10 +153,6 @@ public class Ocean {
 		
 	}
 
-	public boolean isOccupied(int row, int column) {
-		// TODO Auto-generated method stub
-		return !(ships[row][column] instanceof EmptySea);
-	}
 
 
 	@Override
