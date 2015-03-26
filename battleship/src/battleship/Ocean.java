@@ -11,10 +11,6 @@ import java.util.Arrays;
  * @author Mustapha Benbaziz
  *
  */
-/**
- * @author mustaphamustapha
- *
- */
 public class Ocean {
 	
 	/* CONSTANT REPRESENTING THE LENGTH OF THE BOARD */
@@ -114,14 +110,26 @@ public class Ocean {
 		
 	}
 	
+	/**
+	 * 
+	 * @return The number of shots fired by the user.
+	 */
 	public int getShotsFired() {
 		return shotsFired;
 	}
 	
+	/**
+	 * 
+	 * @return The number of times a shot hit a ship.
+	 */
 	public int getHitCount() {
 		return hitCount;
 	}
 	
+	/**
+	 * 
+	 * @return the number of ships sunk by the user.
+	 */
 	public int getShipsSunk() {
 		return shipsSunk;
 	}

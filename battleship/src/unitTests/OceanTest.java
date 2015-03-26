@@ -52,8 +52,26 @@ public class OceanTest {
 	}
 
 	@Test
-	public void testGetShipArray() {
-		fail("Not yet implemented");
+	public void testIsOccupied() {
+		
+		Ship[][] expected = board.getShipArray();
+		Ship[][] actual = expected.clone();
+		actual[2][4] = new Destroyer();
+		
+		assertEquals("Wrong ship type in the array!", expected[3][5].getShipType(), actual[2][4].getShipType());
+		
 	}
+	@Test
+	public void testGetShipArray() {
+		
+		Ship[][] expected = board.getShipArray();
+		Ship actual = new Battleship();
+		
+		/* COORDINATES CHOSEN AT RANDOM WITH EXPECTED ARRAY. ANY NUMBER (LESS THAN 10) CAN BE USED */
+		assertEquals("Wrong ship type in the array!", expected[3][5].getShipType(), actual.getShipType());
+		
+	}
+	
+	
 
 }
