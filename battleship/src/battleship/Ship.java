@@ -140,8 +140,8 @@ public class Ship {
 		}
 
 		/* CHECK THE STERN (END) OF THE SHIP IS NOT OUT OF BOUND */
-		if (sternRow > ocean.getShipArray().length
-				|| sternColumn > ocean.getShipArray().length) {
+		if (sternRow >= ocean.getShipArray().length
+				|| sternColumn >= ocean.getShipArray().length) {
 			okToPlaceShip = false;
 		}
 
@@ -161,9 +161,9 @@ public class Ship {
 		}
 
 		/* ITERATE THROUGH THE BOARD (OCEAN) AND CHECK FOR OCCUPIED CELLS */
-		for (int x = cellAbove; x < cellBelow; x++) {
+		for (int x = cellAbove; x < cellBelow + 1; x++) {
 
-			for (int y = cellBefore; y < cellAfter; y++) {
+			for (int y = cellBefore; y < cellAfter + 1; y++) {
 
 				/* CHECK IF POSITION IS OCCUPIED */
 				if (ocean.isOccupied(x, y)) {
