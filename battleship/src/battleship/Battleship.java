@@ -45,8 +45,8 @@ public class Battleship extends Ship {
 	@Override
 	public String toString() {
 		
-		String output = "[.]";
-		
+		String output = "[B]";
+/*		
 		int counter = 0;
 		
 		for(int i = 0; i < hit.length; i++) {
@@ -63,7 +63,7 @@ public class Battleship extends Ship {
 		
 		if(this.isSunk()) {
 			output = "[S]";
-		}
+		}*/
 		
 		return output;
 	}
