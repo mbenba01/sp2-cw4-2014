@@ -139,31 +139,33 @@ public class Ship {
 			sternColumn = column;
 		}
 
-		/* CHECK THE STERN (END) OF THE SHIP IS NOT OUT OF BOUND */
-		if (sternRow >= ocean.getShipArray().length
-				|| sternColumn >= ocean.getShipArray().length) {
-			okToPlaceShip = false;
-		}
+		if(!isOutOfbound(sternRow, sternColumn, ocean)) {
 
-		/* USED TO CHECK THE CELLS SURROUNDING THE SHIP */
-		if (tempBowRow > 0) {
-			cellAbove--;
-		}
-		if (tempBowColumn > 0) {
-			cellBefore--;
-		}
+			/* USED TO CHECK THE CELLS SURROUNDING THE SHIP */
+			if (tempBowRow > 0) {
+				cellAbove = tempBowRow - 1;
+				//cellAbove--;
+			}
+			if (tempBowColumn > 0) {
+				cellBefore = tempBowColumn - 1;
+				//cellBefore--;
+			}
 
-		if (sternRow < 9) {
-			cellBelow++;
-		}
-		if (sternColumn < 9) {
-			cellAfter++;
+			if (sternRow < 9) {
+				cellBelow = tempBowRow + 1;
+				//cellBelow++;
+			}
+			if (sternColumn < 9) {
+				cellAfter = tempBowColumn + 1;
+				//cellAfter++;
+			}
+			
 		}
 
 		/* ITERATE THROUGH THE BOARD (OCEAN) AND CHECK FOR OCCUPIED CELLS */
-		for (int x = cellAbove; x < cellBelow + 1; x++) {
+		for (int x = cellAbove; x < cellBelow; x++) {
 
-			for (int y = cellBefore; y < cellAfter + 1; y++) {
+			for (int y = cellBefore; y < cellAfter; y++) {
 
 				/* CHECK IF POSITION IS OCCUPIED */
 				if (ocean.isOccupied(x, y)) {
@@ -174,6 +176,20 @@ public class Ship {
 
 		return okToPlaceShip;
 
+	}
+	
+	public boolean isOutOfbound(int row, int column, Ocean ocean) {
+		
+		boolean isOutOfBound = false;
+		
+		/* CHECK THE STERN (END) OF THE SHIP IS NOT OUT OF BOUND */
+		if (row >= ocean.getShipArray().length
+				|| column >= ocean.getShipArray().length) {
+			isOutOfBound = true;
+		} 
+		
+		return isOutOfBound;
+		
 	}
 
 	/**
