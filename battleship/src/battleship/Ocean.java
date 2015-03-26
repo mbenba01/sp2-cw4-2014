@@ -6,6 +6,7 @@ package battleship;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * @author Mustapha Benbaziz
@@ -59,7 +60,7 @@ public class Ocean {
 			
 		}
 		
-		/* CREATE AN EMPTY ARRAY LIST TO STORE THE SHIPS */
+		/* CREATE AN EMPTY ARRAYLIST TO STORE THE SHIPS */
 		fleet = new ArrayList<>();
 		
 		
@@ -88,11 +89,25 @@ public class Ocean {
 	 */
 	public ArrayList<Ship> buildTheFleet() {
 		
+		/* CALL THE METHOD THAT WILL ADD SHIPS TO THE FLEET */
+		this.addShipToFleet(this.fleet, 0);
+		
+		/* RETURN THE ARRAYLIST OF SHIPS (THE FLEET) */
+		return fleet;
+		
+	}
+	
+	/**
+	 * Adds ships to the fleet
+	 * @param fleet represents the ArrayList<Ship> of ships
+	 * @param count Used to count the number of ships placed in the fleet (set to 0 when the method is called)
+	 */
+	public void addShipToFleet(ArrayList<Ship> fleet, int count) {
+		
 		/* USED TO STORE THE NUMBER OF SHIPS */
-		int count = 0;
+		//int count = 0;
 		
-		
-		/* PLACE THE SHIPS IN THE ARRAY LIS (BUILD THE FLEET) */
+		/* PLACE THE SHIPS IN THE ARRAYLIST (BUILD THE FLEET) */
 		while(count < SHIPS) {
 			
 			if(count > 5) {
@@ -109,9 +124,39 @@ public class Ocean {
 			
 		}
 		
-		/* RETURN THE ARRAYLIST OF SHIPS (THE FLEET) */
-		return fleet;
+	}
+	
+	/**
+	 * Places the ships randomly on the board (ocean) using a Random object.
+	 */
+	public void placeShipsRandomly() {
 		
+		/* DECLARE VARIABLES TO STORE SHIP COORDINATES TO BE INITIALISED RANDOMLY */
+		int tempBowRow;
+		int tempBowColumn;
+		
+		/* DECLARE BOOLEAN TO STORE WHETHER A SHIP IS PLACED HORIZONTALLY OR NOT */
+		boolean horizontal;
+		
+		/* GENERATE AN ARRAYLIST OF SHIP OBJECTS TO STORE SHIPS TO PLACE ON THE BOARD (OCEAN) */
+		ArrayList<Ship> fleet = this.buildTheFleet();
+		
+		/* INSTANTIATE A RANDOM OBJECT */
+		Random randomGenerator = new Random();
+		
+		/* LOOP THROUGH THE VESSELS IN THE FLEET */
+		for(Ship vessel: fleet) {
+		
+			/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
+			do {
+				tempBowRow = randomGenerator.nextInt(SHIPS);
+				tempBowColumn = randomGenerator.nextInt(SHIPS);
+				horizontal = randomGenerator.nextBoolean();
+			} while(!vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this));
+			
+			vessel.placeShipAt(tempBowRow, tempBowColumn, horizontal, this);
+			
+		}
 	}
 	
 	/**
