@@ -22,6 +22,9 @@ public class Ocean {
 	/* USED TO DETERMINE WHICH SHIP IS IN ANY GIVEN LOCATION */
 	private Ship[][] ships;
 	
+	/* ARRAYLIST REPRESENTING THE FLEET (10 SHIPS) */
+	private ArrayList<Ship> fleet;
+	
 	/* THE TOTAL NUMBER OF SHOTS FIRED BY THE USER */
 	private int shotsFired;
 	
@@ -46,7 +49,7 @@ public class Ocean {
 		
 		/* INITIALIZE THE SHIP ARRAY (10 x 10) */
 		ships = new Ship[BOARDLENGTH][BOARDLENGTH];
-		
+
 		/* FILL THE ARRAY WITH EMPTYSEA OBJECTS */
 		for(int row = 0; row < ships.length; row++) {
 			
@@ -55,6 +58,10 @@ public class Ocean {
 			}
 			
 		}
+		
+		/* CREATE AN EMPTY ARRAY LIST TO STORE THE SHIPS */
+		fleet = new ArrayList<>();
+		
 		
 		/* INITIALISE INSTANCE VARIABLES */
 		shotsFired = 0;
@@ -80,9 +87,6 @@ public class Ocean {
 	 * @return an arrayList of ship objects
 	 */
 	public ArrayList<Ship> buildTheFleet() {
-		
-		/* CREATE AN EMPTY ARRAY LIST TO STORE THE SHIPS */
-		ArrayList<Ship> fleet = new ArrayList<Ship>();
 		
 		/* USED TO STORE THE NUMBER OF SHIPS */
 		int count = 0;
