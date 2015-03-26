@@ -160,12 +160,6 @@ public class Ocean {
 		}
 		
 	}
-
-	@Override
-	public String toString() {
-		return "[Ship]";
-	}
-	
 	
 	
 }

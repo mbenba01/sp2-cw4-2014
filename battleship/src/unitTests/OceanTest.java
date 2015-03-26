@@ -2,6 +2,7 @@ package unitTests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Before;
@@ -61,6 +62,7 @@ public class OceanTest {
 		assertEquals("Wrong ship type in the array!", expected[3][5].getShipType(), actual[2][4].getShipType());
 		
 	}
+	
 	@Test
 	public void testGetShipArray() {
 		
@@ -71,6 +73,20 @@ public class OceanTest {
 		assertEquals("Wrong ship type in the array!", expected[3][5].getShipType(), actual.getShipType());
 		
 	}
+	
+	@Test
+	public void testBuildFleet() {
+		
+		ArrayList<Ship> actual = board.buildTheFleet();
+		ArrayList<Ship> expected = new ArrayList<Ship>();
+		
+		expected.add(new Submarine());
+		expected.add(new Destroyer());
+		
+		assertEquals("Wrong answer!", expected, actual);
+		
+	}
+	
 	
 	
 
