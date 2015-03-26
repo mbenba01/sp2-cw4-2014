@@ -78,9 +78,9 @@ public class Ocean {
 	 * @return returns true if the location contains a ship
 	 */
 	public boolean isOccupied(int row, int column) {
-
-		return !(ships[row][column] instanceof EmptySea);
 		
+			return !(ships[row][column] instanceof EmptySea); 
+
 	}
 	
 	/**
