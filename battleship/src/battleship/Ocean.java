@@ -63,7 +63,6 @@ public class Ocean {
 		/* CREATE AN EMPTY ARRAYLIST TO STORE THE SHIPS */
 		fleet = new ArrayList<>();
 		
-		
 		/* INITIALISE INSTANCE VARIABLES */
 		shotsFired = 0;
 		hitCount = 0;
@@ -84,38 +83,61 @@ public class Ocean {
 
 	}
 	
-	public boolean[] isRedZone(int row, int column) {
-		
-		int shipLength = ships[row][column].getLength();
+	public boolean isRedZone(int row, int column) {
+				
 		Ship s = ships[row][column];
 		
-		boolean[] redZone = new boolean[10];
+		int shipLength = s.getLength();
+		
+		ArrayList<Integer> redZone = new ArrayList<>();
 		
 		if(isOccupied(row, column)) {
 			
-			if(s.isHorizontal() && row - 1 >= 0 && column + shipLength <= 9) {
-				for(int ca = row - 1; ca < row + 1; ca++) {
-					for(int cb = column - 1; cb < shipLength; cb++) {
+			if(s.isHorizontal() && (row > 0 && row < 9)) {
+				
+				redZone.add(row - 1);
+				redZone.add(row + 1);
+				
+				if(column > 0 && column + s.getLength() <= 9) {
+					
+					for(int c = column - 1; c <= s.getLength(); c++) {
 						
-						redZone[cb] = true;
+						//redZone.add(column - 1);
+						redZone.add(row + c);
 						
 					}
 					
 				}
+					
+				
 			}
 			
-		    if(!s.isHorizontal() && row - 1 >= 0 && row + shipLength <= 9) {
-			
-		    	for(int ca = row - 1; ca < shipLength; ca++) {
-		    		for(int cb = column - 1; cb < column + 1; cb++) {
-		    			redZone[cb] = true;
+		    if(!s.isHorizontal() && column > 0 && column < 9) {
+		    	
+		    	redZone.add(column - 1);
+		    	redZone.add(column + 1);
+		    	
+		    	if(row - 1 >= 0 && row + s.getLength() <= 9) {
+		    		
+		    		for(int r = row - 1; r <= s.getLength(); r++) {
+		    			
+		    			//redZone.add(row - 1);
+		    			redZone.add(column + r);
+		    			
 		    		}
+		    		
 		    	}
 			
 		    }
 		}
 		
-		return redZone;
+		for(int i = 0; i < redZone.size(); i++) {
+			
+			return true;
+			
+		}
+		
+		return false;
 		
 	}
 	
@@ -181,36 +203,26 @@ public class Ocean {
 		/* LOOP THROUGH THE VESSELS IN THE FLEET */
 		for(Ship vessel: fleet) {
 			
-			/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
-			do {
-					
-				tempBowRow = randomGenerator.nextInt(SHIPS);
-				tempBowColumn = randomGenerator.nextInt(SHIPS);
-				
-				horizontal = randomGenerator.nextBoolean();
-				
-				
-	
-				
-			} while(!vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this));
-
-			if(!(vessel.isOutOfbound(tempBowRow, tempBowColumn, this))) {
-				
-				if(this.isOccupied(tempBowRow, tempBowColumn)) {
-					
-					if (horizontal) {
-						tempBowRow = randomGenerator.nextInt(SHIPS) + 2;
-					} else {
-						tempBowColumn = randomGenerator.nextInt(SHIPS) + 2;
-					}
-					
-				}
-				
-				vessel.placeShipAt(tempBowRow, tempBowColumn, horizontal, this);
-				
+			horizontal = randomGenerator.nextBoolean();
+			
+			while(vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this)) {
+			
+			tempBowRow = randomGenerator.nextInt(SHIPS);
+			tempBowColumn = randomGenerator.nextInt(SHIPS);
+			
 			}
+					
+					if((!this.isOccupied(tempBowRow, tempBowColumn)) || (!this.isRedZone(tempBowRow, tempBowColumn))) {
+						
+						/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
+						vessel.placeShipAt(tempBowRow, tempBowColumn, horizontal, this);
+				
+					} 
+				
 		}
+			
 	}
+
 	
 	/**
 	 * 

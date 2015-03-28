@@ -40,6 +40,7 @@ public class OceanTest {
 		
 		Ship[][] ships = board.getShipArray();
 		
+		
 		Ship actual = new Destroyer();
 		Ship expected = new Ship();
 		
@@ -92,12 +93,16 @@ public class OceanTest {
 		
 		Ship[][] grid = board.getShipArray();
 		
+		
 		board.placeShipsRandomly();
 		
 		for(int i = 0; i < grid.length; i++) {
 			
 			for(int j = 0; j < grid[i].length; j++) {
 				
+				/*if(board.isRedZone(i, j)) {
+					System.out.print("[T]");
+				}*/
 				System.out.print(grid[i][j]);
 				
 			}

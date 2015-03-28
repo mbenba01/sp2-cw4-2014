@@ -117,7 +117,6 @@ public class Ship {
 		/* CREATE A NEW SHIP ARRAY */
 		Ship[][] grid = ocean.getShipArray();
 		
-		boolean[] redZone = ocean.isRedZone(row, column);
 	
 		//start old code
 		
@@ -144,15 +143,17 @@ public class Ship {
 			
 		}
 		
-		for(tempBowRow = 0; tempBowRow < grid.length; tempBowRow++) {
+		/*for(tempBowRow = 0; tempBowRow < grid.length; tempBowRow++) {
 			for(tempBowColumn = 0; tempBowColumn < grid[tempBowRow].length; tempBowColumn++) {
-				if(redZone[tempBowColumn] == true) {
+				
+				if(ocean.isRedZone(tempBowRow, tempBowColumn)) {
 					okToPlaceShip = false;
 				}
+				
 			}
 		}
 		
-		/*for(tempBowRow = 0; tempBowRow < grid.length; tempBowRow++) {
+		for(tempBowRow = 0; tempBowRow < grid.length; tempBowRow++) {
 			for(tempBowColumn = 0; tempBowColumn < grid[tempBowRow].length; tempBowColumn++) {
 				if(ocean.isOccupied(row, column)) {
 			
