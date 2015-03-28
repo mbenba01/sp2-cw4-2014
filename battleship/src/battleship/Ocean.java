@@ -84,6 +84,42 @@ public class Ocean {
 
 	}
 	
+	public boolean[] isRedZone(int row, int column) {
+		
+		int shipLength = ships[row][column].getLength();
+		Ship s = ships[row][column];
+		
+		boolean[] redZone = new boolean[10];
+		
+		if(isOccupied(row, column)) {
+			
+			if(s.isHorizontal() && row - 1 >= 0 && column + shipLength <= 9) {
+				for(int ca = row - 1; ca < row + 1; ca++) {
+					for(int cb = column - 1; cb < shipLength; cb++) {
+						
+						redZone[cb] = true;
+						
+					}
+					
+				}
+			}
+			
+		    if(!s.isHorizontal() && row - 1 >= 0 && row + shipLength <= 9) {
+			
+		    	for(int ca = row - 1; ca < shipLength; ca++) {
+		    		for(int cb = column - 1; cb < column + 1; cb++) {
+		    			redZone[cb] = true;
+		    		}
+		    	}
+			
+		    }
+		}
+		
+		return redZone;
+		
+	}
+	
+	
 	/**
 	 * Builds the fleet of different ships to be placed on the board
 	 * @return an arrayList of ship objects
