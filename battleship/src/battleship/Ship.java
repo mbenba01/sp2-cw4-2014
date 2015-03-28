@@ -3,6 +3,7 @@
  */
 package battleship;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -113,79 +114,85 @@ public class Ship {
 		/* ASSUME IT'S OK TO PLACE A SHIP AT THIS POINT */
 		boolean okToPlaceShip = true;
 
+		/* CREATE A NEW SHIP ARRAY */
+		Ship[][] grid = ocean.getShipArray();
+
+		
+	
+		//start old code
+		
 		/* STORE BOW COORDINATES IN TEMP VARIABLES TO USE IN THIS METHOD */
 		int tempBowRow = row;
 		int tempBowColumn = column;
 
-		/* DECLARE THE STERN COORDINATES */
+		 /* DECLARE THE STERN COORDINATES */
 		int sternRow;
 		int sternColumn;
-
-		/* LOCAL VARIABLES USED AS TEMPORARY HOLDERS TO CHECK SURROUNDING CELLS */
-		int cellAbove = tempBowRow;
-		int cellBelow = tempBowRow;
-		int cellBefore = tempBowColumn;
-		int cellAfter = tempBowColumn;
-
-		/*
-		 * INITIALISE STERN COORDINATES ACCORDING TO THE ORIEMNTATION OF THE
-		 * SHIP
-		 */
+		
+		 /* INITIALISE STERN COORDINATES ACCORDING TO THE ORIENTATION OF THE SHIP */
 		if (horizontal) {
 			sternRow = row;
-			sternColumn = column + getLength();
+			sternColumn = column + getLength() - 1;
 		} else {
-			sternRow = row + getLength();
+			sternRow = row + getLength() - 1;
 			sternColumn = column;
 		}
 
-		if(!isOutOfbound(sternRow, sternColumn, ocean)) {
-
-			/* USED TO CHECK THE CELLS SURROUNDING THE SHIP */
-			if (tempBowRow > 0) {
-				cellAbove = tempBowRow - 1;
-				//cellAbove--;
-			}
-			if (tempBowColumn > 0) {
-				cellBefore = tempBowColumn - 1;
-				//cellBefore--;
-			}
-
-			if (sternRow < 9) {
-				cellBelow = tempBowRow + 1;
-				//cellBelow++;
-			}
-			if (sternColumn < 9) {
-				cellAfter = tempBowColumn + 1;
-				//cellAfter++;
-			}
+		if(isOutOfbound(sternRow, sternColumn, ocean)) {
+			
+			okToPlaceShip = false;
 			
 		}
-
-		/* ITERATE THROUGH THE BOARD (OCEAN) AND CHECK FOR OCCUPIED CELLS */
-		for (int x = cellAbove; x < cellBelow; x++) {
-
-			for (int y = cellBefore; y < cellAfter; y++) {
-
-				/* CHECK IF POSITION IS OCCUPIED */
-				if (ocean.isOccupied(x, y)) {
-					okToPlaceShip = false;
+		
+		for(tempBowRow = 0; tempBowRow < grid.length; tempBowRow++) {
+			for(tempBowColumn = 0; tempBowColumn < grid[tempBowRow].length; tempBowColumn++) {
+				if(ocean.isOccupied(row, column)) {
+			
+					if(row - 1 >= 0) {
+						for(int i = row - 1; i <= sternRow + 1; i++ ) {
+							for(int j = column - 1; j <= this.getLength() + 1; j++) {
+								okToPlaceShip = false;
+							}
+					
+						}
+					}
+					if(column - 1 >= 0) {
+						for(int a = column - 1; a <= sternColumn + 1; a++) {
+							for(int b = row - 1; b <= this.getLength() + 1; b++) {
+								okToPlaceShip = false;
+							}
+						}
+					}
+			
 				}
 			}
 		}
+		
+		//}
+		
+		//end
 
 		return okToPlaceShip;
 
 	}
 	
+	/**
+	 * Checks whether the ship overflow the board of the game
+	 * @param row 
+	 * @param column
+	 * @param ocean represents the board of the game to check against
+	 * @return
+	 */
 	public boolean isOutOfbound(int row, int column, Ocean ocean) {
 		
 		boolean isOutOfBound = false;
 		
 		/* CHECK THE STERN (END) OF THE SHIP IS NOT OUT OF BOUND */
-		if (row >= ocean.getShipArray().length
-				|| column >= ocean.getShipArray().length) {
+		if (row + this.getLength() - 1 >= ocean.getShipArray().length
+				|| column + this.getLength() - 1 >= ocean.getShipArray().length) {
+			
 			isOutOfBound = true;
+			
 		} 
 		
 		return isOutOfBound;
@@ -213,7 +220,7 @@ public class Ship {
 		/* ONLY LOOP IF IT IS OK TO PLACE A SHIP AT THE GIVEN COORDINATES */
 		if(okToPlaceShipAt(row, column, horizontal, ocean)) {
 		
-			for (int i = 0; i < getLength(); i++) {
+			for (int i = 0; i < ships[row][column].getLength(); i++) {
 			
 				if (horizontal) {
 				
@@ -248,7 +255,9 @@ public class Ship {
 		
 		/* CHECK IF THE SHIP IS NOT SUNK */
 		if(isSunk()) {
+			
 			return false;
+			
 		}
 		
 		/* LOOP THROUGH THE LENGTH OF THE SHIP */
@@ -259,16 +268,20 @@ public class Ship {
 				
 				/* IF THE SHIP IS ALIGNED HORIZONTALLY */
 				if(tempBowRow == row && tempBowColumn + i == column) {
+					
 					 this.hit[i] = true;
 					 return true;
+					 
 				}
 				
 			} else {
 				
 				/* IF THE SHIP IS ALIGNED VERTICALLY */
 				if(tempBowRow + i == row && tempBowColumn == column) {
+					
 					this.hit[i] = true;
 					return true;
+					
 				}
 				
 			}
@@ -288,7 +301,9 @@ public class Ship {
 		for(boolean hit : hit) {
 			
 			if(!hit) {
+				
 				return false;
+				
 			}
 			
 		}

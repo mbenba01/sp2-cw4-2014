@@ -79,7 +79,8 @@ public class Ocean {
 	 */
 	public boolean isOccupied(int row, int column) {
 		
-			return !(ships[row][column] instanceof EmptySea); 
+		/* RETURN TRUE IF THE OBJECT AT A GIVEN LOCATION IS NOT EMPTYSEA */
+		return !(ships[row][column] instanceof EmptySea); 
 
 	}
 	
@@ -103,10 +104,7 @@ public class Ocean {
 	 * @param count Used to count the number of ships placed in the fleet (set to 0 when the method is called)
 	 */
 	public void addShipToFleet(ArrayList<Ship> fleet, int count) {
-		
-		/* USED TO STORE THE NUMBER OF SHIPS */
-		//int count = 0;
-		
+	
 		/* PLACE THE SHIPS IN THE ARRAYLIST (BUILD THE FLEET) */
 		while(count < SHIPS) {
 			
@@ -132,30 +130,49 @@ public class Ocean {
 	public void placeShipsRandomly() {
 		
 		/* DECLARE VARIABLES TO STORE SHIP COORDINATES TO BE INITIALISED RANDOMLY */
-		int tempBowRow;
-		int tempBowColumn;
+		int tempBowRow = 0;
+		int tempBowColumn = 0;
 		
 		/* DECLARE BOOLEAN TO STORE WHETHER A SHIP IS PLACED HORIZONTALLY OR NOT */
 		boolean horizontal;
 		
 		/* GENERATE AN ARRAYLIST OF SHIP OBJECTS TO STORE SHIPS TO PLACE ON THE BOARD (OCEAN) */
-		ArrayList<Ship> fleet = this.buildTheFleet();
+		fleet = this.buildTheFleet();
 		
 		/* INSTANTIATE A RANDOM OBJECT */
 		Random randomGenerator = new Random();
 		
 		/* LOOP THROUGH THE VESSELS IN THE FLEET */
 		for(Ship vessel: fleet) {
-		
+			
 			/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
 			do {
+					
 				tempBowRow = randomGenerator.nextInt(SHIPS);
 				tempBowColumn = randomGenerator.nextInt(SHIPS);
+				
 				horizontal = randomGenerator.nextBoolean();
+				
+				
+	
+				
 			} while(!vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this));
-			
-			vessel.placeShipAt(tempBowRow, tempBowColumn, horizontal, this);
-			
+
+			if(!(vessel.isOutOfbound(tempBowRow, tempBowColumn, this))) {
+				
+				if(this.isOccupied(tempBowRow, tempBowColumn)) {
+					
+					if (horizontal) {
+						tempBowRow = randomGenerator.nextInt(SHIPS) + 2;
+					} else {
+						tempBowColumn = randomGenerator.nextInt(SHIPS) + 2;
+					}
+					
+				}
+				
+				vessel.placeShipAt(tempBowRow, tempBowColumn, horizontal, this);
+				
+			}
 		}
 	}
 	
@@ -190,25 +207,41 @@ public class Ocean {
 		return ships;
 	}
 	
-	public void print() {
+	/**
+	 * 
+	 * @return the length of the ships array. used to simplify coding. 
+	 */
+	public int getLength() {
+		return this.ships.length;
+	}
+	
+ 	public void print() {
+		
 		for(int index = 0; index < BOARDLENGTH;) {
+			
 			System.out.print(" ");
 			for(int hindex = 0; hindex < BOARDLENGTH; hindex++) {
-			System.out.print("  " + hindex);
+				
+				System.out.print("  " + hindex);
+			
 			}
 			break;
 		}
+		
 		System.out.println();
 		for(int v = 0; v < BOARDLENGTH; v++) {
+			
 			System.out.print(v + " ");
 			for(int h = 0; h < BOARDLENGTH; h++) {
+				
 				System.out.print("[.]");
+				
 			}
+			
 			System.out.println();
 			
 		}
 		
 	}
-	
 	
 }
