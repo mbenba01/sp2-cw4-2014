@@ -93,7 +93,6 @@ public class OceanTest {
 		
 		Ship[][] grid = board.getShipArray();
 		
-		
 		board.placeShipsRandomly();
 		
 		for(int i = 0; i < grid.length; i++) {

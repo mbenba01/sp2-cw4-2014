@@ -89,21 +89,24 @@ public class Ocean {
 		
 		int shipLength = s.getLength();
 		
+		int x = s.getBowRow();
+		int y = s.getBowColumn();
+		
 		ArrayList<Integer> redZone = new ArrayList<>();
 		
-		if(isOccupied(row, column)) {
+		if(isOccupied(x, y)) {
 			
-			if(s.isHorizontal() && (row > 0 && row < 9)) {
+			if(s.isHorizontal() && (x > 0 && y < 9)) {
 				
-				redZone.add(row - 1);
-				redZone.add(row + 1);
+				redZone.add(x - 1);
+				redZone.add(x + 1);
 				
-				if(column > 0 && column + s.getLength() <= 9) {
+				if(y > 0 && y + shipLength <= 9) {
 					
-					for(int c = column - 1; c <= s.getLength(); c++) {
+					for(int c = y - 1; c <= shipLength; c++) {
 						
-						//redZone.add(column - 1);
-						redZone.add(row + c);
+						redZone.add(y - 1);
+						redZone.add(x + c);
 						
 					}
 					
@@ -112,17 +115,17 @@ public class Ocean {
 				
 			}
 			
-		    if(!s.isHorizontal() && column > 0 && column < 9) {
+		    if(!s.isHorizontal() && y > 0 && y < 9) {
 		    	
-		    	redZone.add(column - 1);
-		    	redZone.add(column + 1);
+		    	redZone.add(y - 1);
+		    	redZone.add(y + 1);
 		    	
-		    	if(row - 1 >= 0 && row + s.getLength() <= 9) {
+		    	if(x - 1 >= 0 && x + shipLength <= 9) {
 		    		
-		    		for(int r = row - 1; r <= s.getLength(); r++) {
+		    		for(int r = x - 1; r <= shipLength; r++) {
 		    			
-		    			//redZone.add(row - 1);
-		    			redZone.add(column + r);
+		    			redZone.add(x - 1);
+		    			redZone.add(y + r);
 		    			
 		    		}
 		    		
@@ -205,9 +208,8 @@ public class Ocean {
 			
 			do {
 				
-				tempBowRow = randomGenerator.nextInt(SHIPS - 1);
-				tempBowColumn = randomGenerator.nextInt(SHIPS - 1);
-			
+				tempBowRow = randomGenerator.nextInt(SHIPS);
+				tempBowColumn = randomGenerator.nextInt(SHIPS);
 				horizontal = randomGenerator.nextBoolean();
 			
 			} while(!vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this));
