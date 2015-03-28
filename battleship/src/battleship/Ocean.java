@@ -203,24 +203,20 @@ public class Ocean {
 		/* LOOP THROUGH THE VESSELS IN THE FLEET */
 		for(Ship vessel: fleet) {
 			
-			horizontal = randomGenerator.nextBoolean();
+			do {
+				
+				tempBowRow = randomGenerator.nextInt(SHIPS - 1);
+				tempBowColumn = randomGenerator.nextInt(SHIPS - 1);
 			
-			while(vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this)) {
+				horizontal = randomGenerator.nextBoolean();
 			
-			tempBowRow = randomGenerator.nextInt(SHIPS);
-			tempBowColumn = randomGenerator.nextInt(SHIPS);
-			
-			}
+			} while(!vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this));
+
+			/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
+			vessel.placeShipAt(tempBowRow, tempBowColumn, horizontal, this);
 					
-					if((!this.isOccupied(tempBowRow, tempBowColumn)) || (!this.isRedZone(tempBowRow, tempBowColumn))) {
-						
-						/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
-						vessel.placeShipAt(tempBowRow, tempBowColumn, horizontal, this);
-				
-					} 
-				
 		}
-			
+	
 	}
 
 	

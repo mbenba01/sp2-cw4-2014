@@ -77,7 +77,13 @@ public class Ship {
 	 *            represents the row for the position of the ship
 	 */
 	public void setBowRow(int row) {
-		this.bowRow = row;
+		
+		if(row >= 0 && row <= 9) {
+			this.bowRow = row;
+		} else {
+			System.out.println("Ooops! there is a problem, please restart the program!");
+		}
+		
 	}
 
 	/**
@@ -87,7 +93,11 @@ public class Ship {
 	 *            represents the column for the position of the ship
 	 */
 	public void setBowColumn(int column) {
-		this.bowColumn = column;
+		if(column >= 0 && column <= 9) {
+			this.bowColumn = column;
+		} else {
+			System.out.println("Ooops! there is a problem, please restart the program!");
+		}
 	}
 
 	/**
@@ -117,9 +127,6 @@ public class Ship {
 		/* CREATE A NEW SHIP ARRAY */
 		Ship[][] grid = ocean.getShipArray();
 		
-	
-		//start old code
-		
 		/* STORE BOW COORDINATES IN TEMP VARIABLES TO USE IN THIS METHOD */
 		int tempBowRow = row;
 		int tempBowColumn = column;
@@ -137,73 +144,46 @@ public class Ship {
 			sternColumn = column;
 		}
 
-		if(isOutOfbound(sternRow, sternColumn, ocean)) {
+		if(isOutOfbound() 
+				|| ocean.isOccupied(row, column)
+				|| ocean.isRedZone(row, column)) {
 			
 			okToPlaceShip = false;
 			
 		}
 		
-		/*for(tempBowRow = 0; tempBowRow < grid.length; tempBowRow++) {
-			for(tempBowColumn = 0; tempBowColumn < grid[tempBowRow].length; tempBowColumn++) {
-				
-				if(ocean.isRedZone(tempBowRow, tempBowColumn)) {
-					okToPlaceShip = false;
-				}
-				
-			}
-		}
 		
-		for(tempBowRow = 0; tempBowRow < grid.length; tempBowRow++) {
-			for(tempBowColumn = 0; tempBowColumn < grid[tempBowRow].length; tempBowColumn++) {
-				if(ocean.isOccupied(row, column)) {
-			
-					if(row - 1 >= 0) {
-						for(int i = row - 1; i <= sternRow + 1; i++ ) {
-							for(int j = column - 1; j <= this.getLength() + 1; j++) {
-								okToPlaceShip = false;
-							}
-					
-						}
-					}
-					if(column - 1 >= 0) {
-						for(int a = column - 1; a <= sternColumn + 1; a++) {
-							for(int b = row - 1; b <= this.getLength() + 1; b++) {
-								okToPlaceShip = false;
-							}
-						}
-					}
-			
-				}
-			}*/
-		//}
 		
-		//}
-		
-		//end
-
 		return okToPlaceShip;
 
 	}
 	
 	/**
 	 * Checks whether the ship overflow the board of the game
-	 * @param row 
-	 * @param column
-	 * @param ocean represents the board of the game to check against
-	 * @return
+	 * @return true if the ship is out of bound with regard to the board
 	 */
-	public boolean isOutOfbound(int row, int column, Ocean ocean) {
+	public boolean isOutOfbound() {
 		
+		/* ASSUME THAT NO SHIP IS OUT OF BOUNDARY */
 		boolean isOutOfBound = false;
 		
+		/* CREATE AN INSTANCE OF THE BOARD (OCEAN) TO SET THE BOUNDARIES */
+		Ocean ocean = new Ocean();
+		
+		/* STORE VALUES OF THE BOWROW AND BOWCOLUMN */
+		int row = this.getBowRow();
+		int column = this.getBowColumn();
+		
 		/* CHECK THE STERN (END) OF THE SHIP IS NOT OUT OF BOUND */
-		if (row + this.getLength() - 1 >= ocean.getShipArray().length
-				|| column + this.getLength() - 1 >= ocean.getShipArray().length) {
+		if (row + this.getLength() > ocean.getLength()
+				|| column + this.getLength() > ocean.getLength()) {
 			
+			/* SET TO TRUE IF THE LENGTH OF THE SHIP OVERFLOW THE BOARD  */
 			isOutOfBound = true;
 			
 		} 
 		
+		/* RETURN THE BOOLEAN RESULT OF THIS OPERATION */
 		return isOutOfBound;
 		
 	}
@@ -226,78 +206,45 @@ public class Ship {
 		/* GET A REFERENCE TO THE SHIP ARRAY */
 		Ship[][] ships = ocean.getShipArray();
 
-		/* ONLY LOOP IF IT IS OK TO PLACE A SHIP AT THE GIVEN COORDINATES */
-		if(okToPlaceShipAt(row, column, horizontal, ocean)) {
-		
-			for (int i = 0; i < ships[row][column].getLength(); i++) {
+		/* LOOP THE LENGTH OF THE SHIP */
+		for (int i = 0; i < this.getLength() - 1; i++) {
+			
+			ships[row][column] = this;
 			
 				if (horizontal) {
 				
-					/*
-					 * THE SHIP REMAINS ON THE SAME ROW AND ONLY THE COLUMN
-					 * INCREMENTS THE LENGTH OF THE SHIP
-					 */
-					ships[row][column + i] = this;
+					column++;
 
-			
 				} else {
 
-					/*
-					 * IS VERTICAL..THE SHIP REMAINS ON THE SAME COLUMN AND ONLY THE
-					 * ROW INCREMENTS THE LENGTH OF THE SHIP 
-					 */
-					ships[row + i][column] = this;
+					row++;
 			
 				}
 
-			}
-		
 		}
 
 	}
 	
+	/**
+	 * 
+	 * @param row
+	 * @param column
+	 * @return
+	 */
+
 	public boolean shootAt(int row, int column) {
 		
-		/* STORE COORDINATES FOR THE SHIP TO COMPARE WITH USER INPUT (SHOT) */
-		int tempBowRow = this.getBowRow();
-		int tempBowColumn = this.getBowColumn();
-		
-		/* CHECK IF THE SHIP IS NOT SUNK */
-		if(isSunk()) {
+		if((this.isHorizontal() && (row != this.getBowRow()))  
+			|| (!this.isHorizontal() && (column != getBowColumn()))) {
 			
 			return false;
 			
 		}
 		
-		/* LOOP THROUGH THE LENGTH OF THE SHIP */
-		for(int i = 0; i < getLength(); i++) {
-			
-			
-			if(isHorizontal()) {
-				
-				/* IF THE SHIP IS ALIGNED HORIZONTALLY */
-				if(tempBowRow == row && tempBowColumn + i == column) {
-					
-					 this.hit[i] = true;
-					 return true;
-					 
-				}
-				
-			} else {
-				
-				/* IF THE SHIP IS ALIGNED VERTICALLY */
-				if(tempBowRow + i == row && tempBowColumn == column) {
-					
-					this.hit[i] = true;
-					return true;
-					
-				}
-				
-			}
-			
-		}
+		hit[row - getBowRow() + column - getBowColumn()] = true;
 		
-		return false;
+		return true;
+		
 	}
 
 	/**
@@ -322,7 +269,7 @@ public class Ship {
 	}
 	
 	
-	/* THIS METHOD IS USED FOR TESTING PURPOSES */
+/* THIS METHOD IS USED FOR TESTING PURPOSES */
 	
 /*	public static void main(String[] args) {
 		
@@ -361,6 +308,10 @@ public class Ship {
 		
 		return count;
 	}*/
+	@Override
+	public String toString() {
+		return this.getClass().getName();
+	}
 	
 
 }
