@@ -38,6 +38,12 @@ public class BattleshipGameImpl implements BattleshipGame {
 			board.shootAt(row, column);
 
 		}while(!board.isGameOver());
+		
+		System.out.println("Congratulation! you have sunk all ships");
+		System.out.println("You have used " + board.getShotsFired() + "shots to complete the game");
+		System.out.println("You had " + board.getHitCount() + "hits");
+		
+		input.close();
 	}
 	
 	/**
