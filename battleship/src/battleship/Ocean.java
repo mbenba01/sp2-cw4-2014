@@ -100,12 +100,6 @@ public class Ocean {
 		int x = s.getBowRow();
 		int y = s.getBowColumn();
 		
-		/* USE HOLDER VARIABLES STORE SURROUNDING CELL VALUES */
-		int topToBottom = x;
-		int leftToRight = x;
-		
-		int surroundingBlock = 0;
-		
 		/* CREATE ARRAYLIST TO STORE ALL ADJACENT POSITIONS */
 		ArrayList<Integer> redZone = new ArrayList<>();
 		
@@ -113,33 +107,43 @@ public class Ocean {
 		if(isOccupied(x, y)) {
 			
 			/* IF THERE IS SPACE ABOVE BOWROW NUDGE ONE CELL TO TOP */
-			if(x > 0 && x < 9) {  topToBottom = x - 1; }
-			
-			/* IF THERE IS SPACE BEFORE BOWCOLUMN NUDGE ONE CELL TO THE LEFT */
-			if(y > 0 && y < 9) { leftToRight = y - 1; }
 
 			
 				/* CHECK IF SET TO HORIZONTAL */
-				if(s.isHorizontal()) {
+				if(s.isHorizontal() && (x > 0 && x < 9)) {
 				
 					//LOOP THROUGH THE SURROUNDING CELLS AND ADD 1 TO THE ARRAYLIST FOR EACH CELL */
-					for(int r = topToBottom; r <= x; r++) {
+					for(int r = x - 2; r <= x - 1; r++) {
 
-						for(int c = leftToRight; c <= shipLength; c++) {
+						for(int c = y - 1; c <= shipLength; c++) {
+							redZone.add(1);
+						}
+					}
+					for(int r = x + 1; r <= x +  2; r++) {
+
+						for(int c = y - 1; c <= shipLength; c++) {
 							redZone.add(1);
 						}
 					
 					}
+
 			
 			}
 			
 				/* CHECK IF SET TO VERTICAL*/
-				if(!s.isHorizontal()) {
+				if(!s.isHorizontal() && (y > 0 && y < 9)) {
 		    	
 					//LOOP THROUGH THE SURROUNDING CELLS AND ADD 1 TO THE ARRAYLIST FOR EACH CELL */
-					for(int r = leftToRight; r <= y; r++) {
+					for(int r = y - 2; r <= y - 1; r++) {
 						
-						for(int c = topToBottom ; c <= shipLength; c++) {
+						for(int c = x - 1 ; c <= shipLength; c++) {
+							redZone.add(1);
+						}
+						
+					}
+					for(int r = y + 1; r <= y + 2; r++) {
+						
+						for(int c = x - 1 ; c <= shipLength; c++) {
 							redZone.add(1);
 						}
 						
@@ -150,7 +154,7 @@ public class Ocean {
 		
 		/* LOOP THROUGH ARRAYLIST 'REDZONE' AND RETURN TRUE FOR EACH ITEM THAT EQUAL 1 */ 
 		for(int block : redZone) {
-			
+
 			return (block == 1);
 			
 		}
@@ -223,11 +227,12 @@ public class Ocean {
 		for(Ship vessel: fleet) {
 			
 				do {
-				tempBowRow = randomGenerator.nextInt(SHIPS);
-				
-				tempBowColumn = randomGenerator.nextInt(SHIPS);
+					
+				tempBowRow = randomGenerator.nextInt(SHIPS - vessel.getLength());
+				tempBowColumn = randomGenerator.nextInt(SHIPS - vessel.getLength());
 				
 				horizontal = randomGenerator.nextBoolean();
+				
 				} while (!vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this));
 				
 				System.out.print(vessel + " >> L:" + vessel.getLength() + " >> ");
@@ -240,13 +245,9 @@ public class Ocean {
 
 
 			/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
-			if(vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this)) {
+			//do {
 				vessel.placeShipAt(tempBowRow, tempBowColumn, horizontal, this);
-				
-			} else {
-				System.out.println("too long");
-			}
-				
+			//} while(!this.isRedZone(tempBowRow, tempBowColumn, vessel));
 					
 		}
 	

@@ -99,7 +99,7 @@ public class OceanTest {
 			
 			for(int j = 0; j < grid[i].length; j++) {
 				
-				/*if(board.isRedZone(i, j)) {
+				/*if(board.isRedZone(i, j, grid[i][j])) {
 					System.out.print("[T]");
 				}*/
 				System.out.print(grid[i][j]);

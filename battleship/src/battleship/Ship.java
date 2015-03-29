@@ -124,39 +124,39 @@ public class Ship {
 		/* ASSUME IT'S OK TO PLACE A SHIP AT THIS POINT */
 		boolean okToPlaceShip = true;
 		
+		int top = 0;
+		int left = 0;
+		
 		if(ocean.isOccupied(row, column)) { okToPlaceShip = false; }
 		
 		if(this.isOutOfbound()) { 
 			okToPlaceShip = false; 
 			System.out.print("OUTError!");
 		} else {
-			
-			if(row > 0 && row < 9) { row = row -1; }
-			if(column > 0 && column < 9) { column = column - 1; } 
 				
-				if(horizontal) {
-					for(int i = row; i <= row; i++) {
-						for(int j = column; j <= this.getLength(); j++) {
-							if(ocean.isRedZone(i, j, this)) {
-								okToPlaceShip = false; 
-								System.out.print("HError!");
-							}
-						}
-					}
-				}		
-				
-				if(!horizontal) {
-					for(int i = column; i <= column; i++) {
-						for(int j = row; j <= this.getLength(); j++) {
-							if(ocean.isRedZone(i, j, this)) {
-								okToPlaceShip = false; 
-								System.out.print("VError!");
-							}
+			if(horizontal && (row > 0 && row < 9) ) {
+				for(int i = row - 1; i <= row; i++) {
+					for(int j = column; j <= this.getLength(); j++) {
+						if(ocean.isRedZone(i, j, this)) {
+							okToPlaceShip = false; 
+							System.out.print("HError!");
 						}
 					}
 				}
+			}		
 				
+			if(!horizontal && (column > 0 && column < 9)) {
+				for(int i = column - 1; i <= column; i++) {
+					for(int j = row; j <= this.getLength(); j++) {
+						if(ocean.isRedZone(i, j, this)) {
+							okToPlaceShip = false; 
+							System.out.print("VError!");
+						}
+					}
+				}
 			}
+				
+		}
 		
 		return okToPlaceShip;
 
@@ -214,20 +214,17 @@ public class Ship {
 		/* LOOP THE LENGTH OF THE SHIP */
 		for (int i = 0; i < this.getLength(); i++) {
 			
-			/* INSTANTIATE SHIP OBJECT AT GIVEN LOCATION */
-			ships[row][column] = this;
-			
 				/* IF POSITION OF SHIP IS SET TO HORIZONTAL..*/
 				if (horizontal) {
 					
 					/* ..INCREMENT COLUMNS */
-					column++;
+					ships[row][column + i] = this;
 				
 				/* IF POSITION IS SET TO VERTICAL.. */	
 				} else {
 					
 					/* ..INCREMENT ROWS */
-					row++;
+					ships[row + i][column] = this;
 			
 				}
 
