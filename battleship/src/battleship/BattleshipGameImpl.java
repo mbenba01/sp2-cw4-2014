@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class BattleshipGameImpl implements BattleshipGame {
 
-	
+	private Scanner input = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		
-		Scanner input = new Scanner(System.in);
+		
 		
 		BattleshipGame game = new BattleshipGameImpl();
 		
@@ -20,7 +20,8 @@ public class BattleshipGameImpl implements BattleshipGame {
 		board.placeShipsRandomly();
 		
 		board.print();
-
+		
+		game.promptUserForInput();
 	}
 	
 	/**
@@ -42,9 +43,19 @@ public class BattleshipGameImpl implements BattleshipGame {
 	}
 	
 	@Override
-	public void promptUserForInput() {
+	public void promptUserForInput( ) {
 		
+		System.out.println("Choose a row and a column (0 - 9) to target a ship");
 		
+		while(input.hasNextInt()) {
+			
+			int row = input.nextInt();
+			
+			if(row < 0 || row > 9) {
+				System.out.println("Please choose only digits between 0 and 9");
+			}
+			
+		}
 		
 	}
 
