@@ -29,5 +29,4 @@ public interface BattleshipGame {
 	 */
 	void validateInput();
 
-
 }
