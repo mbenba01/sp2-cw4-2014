@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class BattleshipGameImpl implements BattleshipGame {
 
 	private static Scanner input = new Scanner(System.in);
+	private static String reply;
 	
 	public static void main(String[] args) {
 		
@@ -19,29 +20,38 @@ public class BattleshipGameImpl implements BattleshipGame {
 			
 			game.introduceGame();
 		
-			board.placeShipsRandomly();
-		
-			board.print();
-		
-			int row, column;
-			
-			System.out.println("Take a shot!");
-			System.out.print("row: ");
-			
-			row = game.promptUserForInput(input, "row: ");
-			
-			System.out.println();
-			System.out.print("Column: ");
-			
-			column = game.promptUserForInput(input, "column: ");
-			
-			board.shootAt(row, column);
+			do {
+				
+				board.placeShipsRandomly();
 
-		}while(!board.isGameOver());
+				board.print();
 		
-		System.out.println("Congratulation! you have sunk all ships");
-		System.out.println("You have used " + board.getShotsFired() + "shots to complete the game");
-		System.out.println("You had " + board.getHitCount() + "hits");
+				int row, column;
+			
+				System.out.println("Take a shot!");
+				System.out.print("row: ");
+			
+				row = game.promptUserForInput(input, "row: ");
+			
+				System.out.println();
+				System.out.print("Column: ");
+			
+				column = game.promptUserForInput(input, "column: ");
+			
+				board.shootAt(row, column);
+
+			}while(!board.isGameOver());
+		
+			System.out.println("Congratulation! you have sunk all ships");
+			System.out.println("You have used " + board.getShotsFired() + "shots to complete the game");
+			System.out.println("You had " + board.getHitCount() + "hits");
+			
+			System.out.println("\n\nWould you like to play again (yes/no)");
+			
+			reply = input.next();
+			reply = reply.toLowerCase();
+		
+		}while (reply.equals("yes"));
 		
 		input.close();
 	}
