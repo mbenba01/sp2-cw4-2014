@@ -37,8 +37,18 @@ public class Submarine extends Ship {
 	}
 
 	@Override
-	public String toString() {
-		return "[S]";
+	public String toString() {	
+		
+		String output = "";
+		
+		if(this.isSunk()) {
+			output = "[X]";
+		} else if(isHit()) {
+			output = "[S]";
+		} else {
+			output = "[.]";
+		}
+		return  output;		
 	}
 	
 	
