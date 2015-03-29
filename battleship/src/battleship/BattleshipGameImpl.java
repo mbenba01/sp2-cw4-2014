@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class BattleshipGameImpl implements BattleshipGame {
 
-	private Scanner input = new Scanner(System.in);
+	private static Scanner input = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		
@@ -15,16 +15,29 @@ public class BattleshipGameImpl implements BattleshipGame {
 		
 		Ocean board = new Ocean();
 		
+		do {
+			
+			game.introduceGame();
 		
-		game.introduceGame();
+			board.placeShipsRandomly();
 		
-		board.placeShipsRandomly();
+			board.print();
 		
-		board.print();
-		
-		game.validateInput();
+			int row, column;
+			
+			System.out.println("Take a shot!");
+			System.out.print("row: ");
+			
+			row = game.promptUserForInput(input, "row: ");
+			
+			System.out.println();
+			System.out.print("Column: ");
+			
+			column = game.promptUserForInput(input, "column: ");
+			
+			board.shootAt(row, column);
 
-
+		}while(!board.isGameOver());
 	}
 	
 	/**
@@ -78,31 +91,12 @@ public class BattleshipGameImpl implements BattleshipGame {
 					
 					input.nextLine();
 					
-			}
+				}
 				
-		}while(true);
+			}while(true);
 	
-	}
-	
-	/**
-	 * 
-	 */
-	@Override
-	public void validateInput() {
-		
-		int row, column;
-		
-		System.out.println("Take a shot!");
-		System.out.print("row: ");
-		
-		row = promptUserForInput(input, "row: ");
-		
-		System.out.println();
-		System.out.print("Column: ");
-		
-		column = promptUserForInput(input, "column: ");
-		
-	}
-	
+		}
 
-}
+	}
+
+

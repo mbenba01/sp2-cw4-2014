@@ -24,9 +24,4 @@ public interface BattleshipGame {
 	 */
 	int promptUserForInput(Scanner input, String coordinate);
 
-	/**
-	 * Store and validate user inputs.
-	 */
-	void validateInput();
-
 }

@@ -293,9 +293,23 @@ public class Ocean {
 		hitCount++;
 	}
 	
+	/**
+	 * Sets the number of ships sunk by the user
+	 */
 	public void setShipsSunk() {
 		shipsSunk++;
 	}
+	
+	/**
+	 * The game is over when all ships are sunk
+	 * @return returns true when all ships are sunk 
+	 */
+	public boolean isGameOver() {
+		
+		return (shipsSunk == SHIPS);
+
+	}
+	
 	
 	/**
 	 * 
@@ -338,19 +352,29 @@ public class Ocean {
 	
  	public void print() {
 		
+ 		/* METHOD TO PRINT THE TOP INDEX OF THE BOARD */
 		this.topIndex();
 		
 		System.out.println();
+		
+		/* LOOPS THROUGH THE GAME BOARD */
 		for(int v = 0; v < BOARDLENGTH; v++) {
 			
+			/* PRINT THE VERTICAL INDEX */
 			System.out.print(v + " ");
+			
+			/* LOOP THROUGH EACH ROW */
 			for(int h = 0; h < BOARDLENGTH; h++) {
 				
-				System.out.print(ships[v][h]);
+				Ship vessel = ships[v][h];
+
 				
+					/* PRINT SHIP ON THE BOARD */
+					System.out.print(vessel);
+				
+
 			}
 			System.out.println();
-			
 		}
 	
 	}
