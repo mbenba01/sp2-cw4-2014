@@ -253,6 +253,20 @@ public class Ship {
 		return true;
 		
 	}
+	
+	public boolean isHit() {
+		
+		
+		if(!this.getShipType().equals("EmptySea")) {
+			
+			for(int i = 0; i < this.getLength(); i++) {
+				
+				if(hit[i] == true) {}
+			}
+			
+		}
+		return true;
+	}
 
 	/**
 	 * loops through the hit array and checks if all ship parts are hit
@@ -274,47 +288,7 @@ public class Ship {
 		/* RETURN TRUE IF ALL PARTS OF THE SHIP ARE HIT */
 		return true;
 	}
-	
-	
-/* THIS METHOD IS USED FOR TESTING PURPOSES */
-	
-/*	public static void main(String[] args) {
-		
-		Ship test = new Battleship();
-		test.setHorizontal(false);
-		Ocean board = new Ocean();
-		Ship[][] ships = board.getShipArray();
-		test.setBowRow(2);
-		
-		for(int i=test.getBowRow(); i < test.getLength(); i++) {
-			if(test.horizontal) {
-				test.setBowColumn(i - 1);
-			} else {
-				test.setBowRow(i - 1);
-				test.setBowColumn(test.getBowRow());
-			}
-		}
-		
-		test.shootAt(2, 2);
-		test.shootAt(5, 2);
-		test.shootAt(3, 2);
-		test.shootAt(4, 2);
-		
-		
-		System.out.print(test);
-	}*/
-	
-	
-	/*public int hitCount() {
-		int count = 0;
-		for(int i = 0; i < this.getLength(); i++) {
-			if(!isSunk() && hit[i] == true) {
-				count++;
-			}
-		}
-		
-		return count;
-	}*/
+
 	@Override
 	public String toString() {
 		return this.getClass().getName();

@@ -43,8 +43,16 @@ public class Battleship extends Ship {
 
 
 	@Override
-	public String toString() {		
-		return  "[B]";		
+	public String toString() {	
+		String output = "";
+		if(this.isSunk()) {
+			output = "[X]";
+		} else if(isHit()) {
+			output = "[S]";
+		} else {
+			output = "[.]";
+		}
+		return  output;		
 	}
 	
 }

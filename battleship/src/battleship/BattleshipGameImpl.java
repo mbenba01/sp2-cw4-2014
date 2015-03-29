@@ -23,6 +23,8 @@ public class BattleshipGameImpl implements BattleshipGame {
 		board.print();
 		
 		game.validateInput();
+
+
 	}
 	
 	/**

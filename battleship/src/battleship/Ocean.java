@@ -243,6 +243,60 @@ public class Ocean {
 	}
 
 	
+	boolean shootAt(int row, int column) {
+				
+		setShotsFired();
+		
+		if(isOccupied(row, column)) {
+			
+			Ship vessel = this.getShipArray()[row][column];
+			
+			if(vessel.isSunk()) {
+				
+				return false;
+				
+			} else {
+				
+				vessel.shootAt(row, column);
+				
+				setHitCount();
+				
+				if(vessel.isSunk()) {
+					
+					setShipsSunk();
+					
+					System.out.println("You have just sunk a " + vessel.getShipType());
+				} else {
+					System.out.print("Hit");
+				}
+				return true;
+			}
+		} else {
+			System.out.println("Miss");
+		}
+		return false;
+		
+	}
+	
+	/**
+	 * Sets the number of shots fired by the user
+	 * to display at the end of the game
+	 */
+	public void setShotsFired() {
+		shotsFired++;
+	}
+	
+	/**
+	 * Sets the number of hits to display at the end of the game
+	 */
+	public void setHitCount() {
+		hitCount++;
+	}
+	
+	public void setShipsSunk() {
+		shipsSunk++;
+	}
+	
 	/**
 	 * 
 	 * @return The number of shots fired by the user.
