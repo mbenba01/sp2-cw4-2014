@@ -43,10 +43,8 @@ public class Battleship extends Ship {
 
 
 	@Override
-	public String toString() {
-		
-		return  "[B]";
-			
+	public String toString() {		
+		return  "[B]";		
 	}
 	
 }

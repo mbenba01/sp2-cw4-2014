@@ -120,14 +120,15 @@ public class Ocean {
 						//LOOP THROUGH THE SURROUNDING CELLS AND ADD 1 TO THE ARRAYLIST FOR EACH CELL */
 						for(int r = x - 1; r <= x + 1; r++) {
 
-							for(int c = y - 1; c <= s.getLength(); c++) {
+							for(int c = y - 1; c <= shipLength; c++) {
 								redZone.add(1);
 							}
 						
 						}
+						
 					}
 			
-			}
+				}
 			
 				/* CHECK IF SET TO VERTICAL*/
 				if(!s.isHorizontal()) {
@@ -136,27 +137,26 @@ public class Ocean {
 						//LOOP THROUGH THE SURROUNDING CELLS AND ADD 1 TO THE ARRAYLIST FOR EACH CELL */
 						for(int r = y - 1; r <= y + 1; r++) {
 						
-							for(int c = x - 1; c <= s.getLength(); c++) {
+							for(int c = x - 1; c <= shipLength; c++) {
 								redZone.add(1);
 							}
+							
 						}
 						
 					}
 			
 				}
+				
 			}
-		int num = 0;
+		int count = 0;
 		
 		/* LOOP THROUGH ARRAYLIST 'REDZONE' AND RETURN TRUE FOR EACH ITEM THAT EQUAL 1 */ 
-		for(int block = 0; block < redZone.size(); block++) {
-			
-			num = redZone.get(block);
-			if (num == 1) {
-			return true;
-			}
+		for(int block : redZone) {
+			count = count + 1;
+			return (block == 1);
 			
 		}
-		
+		System.out.println("Count: " + count);
 		/* RETURN FALSE IF A CELL ON THE BOARD IS NOT MARKED AS A RED ZONE */
 		return false;
 		
@@ -232,14 +232,14 @@ public class Ocean {
 				horizontal = randomGenerator.nextBoolean();
 				
 				} while (!vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this));
-				
+				/*
 				System.out.print(vessel + " >> L:" + vessel.getLength() + " >> ");
 				if(horizontal) {
 					System.out.print("H  >> ");
 				} else {
 					System.out.print("V  >> ");
 				}
-				System.out.println(tempBowRow + "\t" + tempBowColumn);
+				System.out.println(tempBowRow + "\t" + tempBowColumn);*/
 
 
 			/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
@@ -293,7 +293,27 @@ public class Ocean {
 	
  	public void print() {
 		
-		for(int index = 0; index < BOARDLENGTH;) {
+		this.topIndex();
+		
+		System.out.println();
+		for(int v = 0; v < BOARDLENGTH; v++) {
+			
+			System.out.print(v + " ");
+			for(int h = 0; h < BOARDLENGTH; h++) {
+				
+				System.out.print(ships[v][h]);
+				
+			}
+			
+			System.out.println();
+			
+		}
+	
+	}
+ 	
+ 	public void topIndex() {
+ 		
+ 		for(int index = 0; index < BOARDLENGTH;) {
 			
 			System.out.print(" ");
 			for(int hindex = 0; hindex < BOARDLENGTH; hindex++) {
@@ -303,46 +323,9 @@ public class Ocean {
 			}
 			break;
 		}
-		
-		System.out.println();
-		for(int v = 0; v < BOARDLENGTH; v++) {
-			
-			System.out.print(v + " ");
-			for(int h = 0; h < BOARDLENGTH; h++) {
-				
-				System.out.print("[.]");
-				
-			}
-			
-			System.out.println();
-			
-		}
-	
-	}
- 	public static void main(String[] args) {
-		
- 		Ocean grid = new Ocean();
-
- 		Ship[][] fleet = grid.getShipArray();
  		
- 		grid.placeShipsRandomly();
- 		
- 		
- 		for(int row = 0; row < grid.getLength(); row++) {
- 			for(int column = 0; column < grid.getLength(); column++) {
- 				System.out.print(fleet[row][column]);
- 				/*if(grid.isOccupied(row, column)) {
- 					System.out.print("-O-");
- 				}
- 				if(grid.isRedZone(row, column, fleet[row][column])) {
- 					System.out.print("-T-");
- 				}*/
- 			}
- 			System.out.println();
- 		}
- 		
- 		
-	}
+ 	}
+ 	
  	
 	
 }
