@@ -22,7 +22,7 @@ public class BattleshipGameImpl implements BattleshipGame {
 		
 		board.print();
 		
-		game.promptUserForInput();
+		game.validateInput();
 	}
 	
 	/**
@@ -43,43 +43,64 @@ public class BattleshipGameImpl implements BattleshipGame {
 		
 	}
 	
+	/**
+	 * 
+	 */
 	@Override
-	public void promptUserForInput( ) {
-		
-		boolean validInput = false;
-		System.out.println("Take a shot!");
-		
-		while (!validInput) {
-			try {
-				
-				System.out.println("Row: ");
-				int row = input.nextInt();
-				
-				
-				if((row < 0 || row > 9)) {
-					System.out.println("Choose digits between 0 and 9");
-					//validInput = false;
-				} else {
-					validInput = true; 
-				}
-				
-				System.out.println("column: ");
-				int column = input.nextInt();
-				
-				if(column < 0 || column > 9) {
-					System.out.println("Choose digits between 0 and 9");
-					//validInput = false;
-				} else {
-					validInput = true; 
-				}
-				
-				} catch(InputMismatchException e) {
-					System.err.println("Please enter a digit!");
-					break;
-				}
+	public int promptUserForInput(Scanner input, String coordinate) {
 			
-		}
+			/* STORES USER INPUT */
+			int userinput;
+			
+			do {
+				
+				try {
+					
+					do {
+						
+						userinput = input.nextInt();
+						
+						if(userinput < 0 || userinput > 9) {
+							System.out.println("Enter a valid digit: 0 to 9");
+							System.out.print(coordinate);
+						}
+						
+					} while (userinput < 0 || userinput > 9);
+		
+					return userinput;
+					
+				} catch(InputMismatchException e) {
+					
+					System.out.println("Enter a valid digit: 0 to 9");
+					System.out.print(coordinate);
+					
+					input.nextLine();
+					
+			}
+				
+		}while(true);
 	
 	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public void validateInput() {
+		
+		int row, column;
+		
+		System.out.println("Take a shot!");
+		System.out.print("row: ");
+		
+		row = promptUserForInput(input, "row: ");
+		
+		System.out.println();
+		System.out.print("Column: ");
+		
+		column = promptUserForInput(input, "column: ");
+		
+	}
+	
 
 }
