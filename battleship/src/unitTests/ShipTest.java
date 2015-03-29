@@ -112,7 +112,7 @@ public class ShipTest {
 		/* should return false as with such coordinates (row = 10) the submarine will be out of bound.
 		 * comment out to use the next test 
 		 * */
-		assertEquals("Wrong answer!", expected, submarine.okToPlaceShipAt(10, 8, false, board));
+		assertEquals("Wrong answer!", expected, submarine.okToPlaceShipAt(1, 8, false, board));
 		
 		/* should return true as it is OK to place a cruiser with the following coordinates.
 		 * comment out to use the next test 
