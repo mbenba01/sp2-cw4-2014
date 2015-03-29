@@ -78,9 +78,15 @@ public class Ocean {
 	 */
 	public boolean isOccupied(int row, int column) {
 		
+		boolean occupied = false;
+		
 		/* RETURN TRUE IF THE OBJECT AT A GIVEN LOCATION IS NOT EMPTYSEA */
-		return !(ships[row][column] instanceof EmptySea); 
-
+		if(!(ships[row][column] instanceof EmptySea)) {
+			for (int i = 0; i < ships[row][column].getLength(); i++) {
+				occupied = true;
+			}
+		}
+		return occupied;
 	}
 	
 	/**
@@ -325,8 +331,12 @@ public class Ocean {
  		for(int row = 0; row < grid.getLength(); row++) {
  			for(int column = 0; column < grid.getLength(); column++) {
  				System.out.print(fleet[row][column]);
- 				//if(grid.isRedZone(row, column, fleet[row][column]))
- 					//System.out.print("-T-");
+ 				/*if(grid.isOccupied(row, column)) {
+ 					System.out.print("-O-");
+ 				}
+ 				if(grid.isRedZone(row, column, fleet[row][column])) {
+ 					System.out.print("-T-");
+ 				}*/
  			}
  			System.out.println();
  		}
