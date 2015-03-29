@@ -240,32 +240,54 @@ public class Ship {
 	 */
 	public boolean shootAt(int row, int column) {
 		
-		// TODO Revise this method (shootAt())
-		if((this.isHorizontal() && (row != this.getBowRow()))  
-			|| (!this.isHorizontal() && (column != getBowColumn()))) {
-			
-			return false;
-			
+		int section;
+		int bowRow = this.getBowRow();
+		int bowColumn = this.getBowColumn();
+		
+		if(!isSunk()) {
+			if(isHorizontal()) {
+				
+				section = column - bowColumn;
+				this.hit[section] = true;
+				return true;
+				
+			} else {
+				
+				section = row - bowRow;
+				this.hit[section] = true;
+				return true;
+			}
 		}
-		
-		hit[row - getBowRow() + column - getBowColumn()] = true;
-		
-		return true;
+		return false;
 		
 	}
 	
 	public boolean isHit() {
 		
+		int section = 0;
 		
 		if(!this.getShipType().equals("EmptySea")) {
 			
-			for(int i = 0; i < this.getLength(); i++) {
+			if(isHorizontal()) {
+			
+				for(int i = this.getBowColumn(); i < this.getLength(); i++) {
 				
-				if(hit[i] == true) {}
+					section = i - this.getBowColumn();
+
+				}
+			}
+			if(!isHorizontal()) {
+				
+				for(int i = this.getBowRow(); i < this.getLength(); i++) {
+					
+					section = i - this.getBowRow();
+
+				}
+				
 			}
 			
 		}
-		return true;
+		return hit[section];
 	}
 
 	/**
