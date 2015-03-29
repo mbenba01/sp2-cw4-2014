@@ -1,5 +1,6 @@
 package battleship;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BattleshipGameImpl implements BattleshipGame {
@@ -45,18 +46,40 @@ public class BattleshipGameImpl implements BattleshipGame {
 	@Override
 	public void promptUserForInput( ) {
 		
-		System.out.println("Choose a row and a column (0 - 9) to target a ship");
+		boolean validInput = false;
+		System.out.println("Take a shot!");
 		
-		while(input.hasNextInt()) {
-			
-			int row = input.nextInt();
-			
-			if(row < 0 || row > 9) {
-				System.out.println("Please choose only digits between 0 and 9");
-			}
+		while (!validInput) {
+			try {
+				
+				System.out.println("Row: ");
+				int row = input.nextInt();
+				
+				
+				if((row < 0 || row > 9)) {
+					System.out.println("Choose digits between 0 and 9");
+					//validInput = false;
+				} else {
+					validInput = true; 
+				}
+				
+				System.out.println("column: ");
+				int column = input.nextInt();
+				
+				if(column < 0 || column > 9) {
+					System.out.println("Choose digits between 0 and 9");
+					//validInput = false;
+				} else {
+					validInput = true; 
+				}
+				
+				} catch(InputMismatchException e) {
+					System.err.println("Please enter a digit!");
+					break;
+				}
 			
 		}
-		
+	
 	}
 
 }
