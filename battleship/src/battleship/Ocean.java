@@ -105,57 +105,49 @@ public class Ocean {
 		
 		/* CHECK IF GIVEN POSITION IS OCCUPIED BY A SHIP */
 		if(isOccupied(x, y)) {
-			
-			/* IF THERE IS SPACE ABOVE BOWROW NUDGE ONE CELL TO TOP */
-
-			
+	
 				/* CHECK IF SET TO HORIZONTAL */
-				if(s.isHorizontal() && (x > 0 && x < 9)) {
-				
-					//LOOP THROUGH THE SURROUNDING CELLS AND ADD 1 TO THE ARRAYLIST FOR EACH CELL */
-					for(int r = x - 2; r <= x - 1; r++) {
-
-						for(int c = y - 1; c <= shipLength; c++) {
-							redZone.add(1);
-						}
-					}
-					for(int r = x + 1; r <= x +  2; r++) {
-
-						for(int c = y - 1; c <= shipLength; c++) {
-							redZone.add(1);
-						}
+				if(s.isHorizontal()) {
 					
-					}
+					if(x > 0 && x < 9) {
+						
+						//LOOP THROUGH THE SURROUNDING CELLS AND ADD 1 TO THE ARRAYLIST FOR EACH CELL */
+						for(int r = x - 1; r <= x + 1; r++) {
 
+							for(int c = y - 1; c <= s.getLength(); c++) {
+								redZone.add(1);
+							}
+						
+						}
+					}
 			
 			}
 			
 				/* CHECK IF SET TO VERTICAL*/
-				if(!s.isHorizontal() && (y > 0 && y < 9)) {
-		    	
-					//LOOP THROUGH THE SURROUNDING CELLS AND ADD 1 TO THE ARRAYLIST FOR EACH CELL */
-					for(int r = y - 2; r <= y - 1; r++) {
+				if(!s.isHorizontal()) {
+					
+					if(y > 0 && y < 9) {
+						//LOOP THROUGH THE SURROUNDING CELLS AND ADD 1 TO THE ARRAYLIST FOR EACH CELL */
+						for(int r = y - 1; r <= y + 1; r++) {
 						
-						for(int c = x - 1 ; c <= shipLength; c++) {
-							redZone.add(1);
-						}
-						
-					}
-					for(int r = y + 1; r <= y + 2; r++) {
-						
-						for(int c = x - 1 ; c <= shipLength; c++) {
-							redZone.add(1);
+							for(int c = x - 1; c <= s.getLength(); c++) {
+								redZone.add(1);
+							}
 						}
 						
 					}
 			
 				}
 			}
+		int num = 0;
 		
 		/* LOOP THROUGH ARRAYLIST 'REDZONE' AND RETURN TRUE FOR EACH ITEM THAT EQUAL 1 */ 
-		for(int block : redZone) {
-
-			return (block == 1);
+		for(int block = 0; block < redZone.size(); block++) {
+			
+			num = redZone.get(block);
+			if (num == 1) {
+			return true;
+			}
 			
 		}
 		
@@ -319,7 +311,28 @@ public class Ocean {
 			System.out.println();
 			
 		}
-		
+	
 	}
+ 	public static void main(String[] args) {
+		
+ 		Ocean grid = new Ocean();
+
+ 		Ship[][] fleet = grid.getShipArray();
+ 		
+ 		grid.placeShipsRandomly();
+ 		
+ 		
+ 		for(int row = 0; row < grid.getLength(); row++) {
+ 			for(int column = 0; column < grid.getLength(); column++) {
+ 				System.out.print(fleet[row][column]);
+ 				//if(grid.isRedZone(row, column, fleet[row][column]))
+ 					//System.out.print("-T-");
+ 			}
+ 			System.out.println();
+ 		}
+ 		
+ 		
+	}
+ 	
 	
 }
