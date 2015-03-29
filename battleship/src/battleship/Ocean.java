@@ -152,11 +152,10 @@ public class Ocean {
 		
 		/* LOOP THROUGH ARRAYLIST 'REDZONE' AND RETURN TRUE FOR EACH ITEM THAT EQUAL 1 */ 
 		for(int block : redZone) {
-			count = count + 1;
+
 			return (block == 1);
 			
 		}
-		System.out.println("Count: " + count);
 		/* RETURN FALSE IF A CELL ON THE BOARD IS NOT MARKED AS A RED ZONE */
 		return false;
 		
@@ -232,20 +231,12 @@ public class Ocean {
 				horizontal = randomGenerator.nextBoolean();
 				
 				} while (!vessel.okToPlaceShipAt(tempBowRow, tempBowColumn, horizontal, this));
-				/*
-				System.out.print(vessel + " >> L:" + vessel.getLength() + " >> ");
-				if(horizontal) {
-					System.out.print("H  >> ");
-				} else {
-					System.out.print("V  >> ");
-				}
-				System.out.println(tempBowRow + "\t" + tempBowColumn);*/
+				
 
 
-			/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
-			//do {
+				/* ASSIGN RANDOM VALUES TO SHIP COORDINATES WHILE IT IS OK TO PLACE THE SHIP AT THE GIVEN LOCATION */
 				vessel.placeShipAt(tempBowRow, tempBowColumn, horizontal, this);
-			//} while(!this.isRedZone(tempBowRow, tempBowColumn, vessel));
+			
 					
 		}
 	
@@ -304,7 +295,6 @@ public class Ocean {
 				System.out.print(ships[v][h]);
 				
 			}
-			
 			System.out.println();
 			
 		}
