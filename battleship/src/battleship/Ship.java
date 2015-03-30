@@ -131,7 +131,7 @@ public class Ship {
 		
 		if(this.isOutOfbound()) { 
 			okToPlaceShip = false; 
-			System.out.print("OUTError!");
+			
 		} else {
 				
 			if(horizontal && (row > 0 && row < 9) ) {
@@ -139,7 +139,7 @@ public class Ship {
 					for(int j = column; j <= this.getLength(); j++) {
 						if(ocean.isRedZone(i, j, this)) {
 							okToPlaceShip = false; 
-							System.out.print("HError!");
+
 						}
 					}
 				}
@@ -150,7 +150,7 @@ public class Ship {
 					for(int j = row; j <= this.getLength(); j++) {
 						if(ocean.isRedZone(i, j, this)) {
 							okToPlaceShip = false; 
-							System.out.print("VError!");
+
 						}
 					}
 				}
@@ -184,7 +184,6 @@ public class Ship {
 			
 			/* SET TO TRUE IF THE LENGTH OF THE SHIP OVERFLOW THE BOARD  */
 			isOutOfBound = true;
-			System.out.print("OError!");
 			
 		} 
 		

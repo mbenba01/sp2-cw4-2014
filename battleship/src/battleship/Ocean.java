@@ -266,14 +266,23 @@ public class Ocean {
 					setShipsSunk();
 					
 					System.out.println("You have just sunk a " + vessel.getShipType());
+					
 				} else {
-					System.out.print("Hit");
+					
+					System.out.println("Hit");
+					
 				}
+				
 				return true;
+				
 			}
+			
 		} else {
+			
 			System.out.println("Miss");
+			
 		}
+		
 		return false;
 		
 	}
@@ -367,11 +376,24 @@ public class Ocean {
 			for(int h = 0; h < BOARDLENGTH; h++) {
 				
 				Ship vessel = ships[v][h];
-
 				
+				if(this.isOccupied(v,  h)) {
+					
+					if(vessel.isSunk()) {
+						System.out.print("[X]");
+					} else {
+						if(vessel.isHit()) {
+							System.out.print("[S]");
+						} else {
+							System.out.print("[.]");
+						}
+					}
+				} else {
+					
 					/* PRINT SHIP ON THE BOARD */
 					System.out.print(vessel);
-				
+
+				}
 
 			}
 			System.out.println();

@@ -13,17 +13,16 @@ public class BattleshipGameImpl implements BattleshipGame {
 		
 		
 		BattleshipGame game = new BattleshipGameImpl();
-		
+	do {
 		Ocean board = new Ocean();
 		
-		do {
 			
 			game.introduceGame();
+			
+			board.placeShipsRandomly();
 		
-			do {
+			while(!board.isGameOver()) {
 				
-				board.placeShipsRandomly();
-
 				board.print();
 		
 				int row, column;
@@ -40,18 +39,20 @@ public class BattleshipGameImpl implements BattleshipGame {
 			
 				board.shootAt(row, column);
 
-			}while(!board.isGameOver());
-		
-			System.out.println("Congratulation! you have sunk all ships");
-			System.out.println("You have used " + board.getShotsFired() + "shots to complete the game");
-			System.out.println("You had " + board.getHitCount() + "hits");
+			}
+			if(board.isGameOver()) {
+				
+				System.out.println("Congratulation! you have sunk all ships");
+				System.out.println("You have used " + board.getShotsFired() + "shots to complete the game");
+				System.out.println("You had " + board.getHitCount() + "hits");
 			
-			System.out.println("\n\nWould you like to play again (yes/no)");
+				System.out.println("\n\nWould you like to play again (yes/no)");
 			
-			reply = input.next();
-			reply = reply.toLowerCase();
-		
-		}while (reply.equals("yes"));
+				reply = input.next();
+				reply = reply.toLowerCase();
+			
+			}
+		}while(reply.equals("yes"));
 		
 		input.close();
 	}
